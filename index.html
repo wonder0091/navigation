@@ -12,7 +12,6 @@
             background-color: rgb(240, 242, 245); /* 更雅观的页面背景色 */
             color: #495057; /* 更深的字体颜色 */
             overflow-x: hidden; /* Hide horizontal scrollbar */
-
         }
 
         #main-container {
@@ -22,15 +21,52 @@
 
         header {
             width: 100%;
-            padding: 15px;
+            height: 60px;
+            padding: 10px;
             color: gray;
             text-align: center;
             position: relative;
             font-weight: bold; /* 加粗字体 */
-            border-bottom: 1px solid #ddd; /* 底部边框线 */
         }
 
+        /* Centered div styling */
+
+        #header-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #search-engine{
+            border: 0;
+            outline: none;
+            border-radius: 10px; /* 圆角 */
+        }
+
+        #search-input{
+            width: 600px;
+            border: 0;
+            border-radius: 10px; /* 圆角 */
+            outline: none;
+        }
+
+        select {
+            margin-right: 10px;
+            padding: 8px;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+        }
+
+        button {
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 10px; /* 圆角 */
+            border: none;
+        }
         /* Left menu styling */
+
         #left-container {
             width: 15%; /* 更窄一点的侧边栏 */
             font-size: 18px;
@@ -63,11 +99,11 @@
         #right-container {
             width: 83%; /* 更宽一点的主内容区域 */
             box-sizing: border-box;
-            padding: 15px;
+            padding: 10px;
             overflow-y: auto;
             position: absolute;
             border-radius: 10px; /* 圆角 */
-            right: 15px;
+            right: 0px;
             top: 60px; /* Adjust as needed based on header height */
             bottom: 0;
             background-color: white; /* 更雅观的页面背景色 */
@@ -86,12 +122,13 @@
         .grid-item {
             padding: 15px;
             text-align: center;
-            color: #495057; /* 更深的字体颜色 */
+            color: black; /* 更深的字体颜色 */
+            font-weight: bold;
             text-decoration: none;
             display: block;
             border-radius: 10px; /* 圆角 */
-            background-color: #fff; /* 白色背景 */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+            background-color:rgb(195,187,196,0.5);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
             transition: box-shadow 0.3s, background-color 0.3s; /* 合并过渡效果属性 */
         }
 
@@ -105,13 +142,23 @@
 
 <div id="main-container">
     <header>
-        <span>导航式网站</span>
+        <div id="header-content">
+            <div>
+                <select id="search-engine">
+                    <option value="https://www.baidu.com/s?wd=%s&ie=utf-8">百度</option>
+                    <option value="https://www.google.com/search?q=%s&ie=utf-8&oe=utf-8">谷歌</option>
+                    <option value="https://cn.bing.com/search?q=%s">必应</option>
+                </select>
+                <input type="text" id="search-input" placeholder="Search...">
+                <button onclick="performSearch()">🔍</button>
+            </div>
+        </div>
     </header>
 
     <!-- Left menu container -->
     <div id="left-container">
         <ul>
-            <li onclick="scrollToSection('section1')">S1</li>
+            <li onclick="scrollToSection('section1')">在线动漫</li>
             <li onclick="scrollToSection('section2')">S2</li>
             <li onclick="scrollToSection('section3')">S3</li>
             <li onclick="scrollToSection('section4')">S4</li>
@@ -124,17 +171,17 @@
     <div id="right-container">
         <!-- Main content sections go here -->
         <section id="section1">
-            <h2>Section 1</h2>
+            <h2>在线动漫</h2>
             <div class="grid-container">
-                <a href="#" class="grid-item" target="_blank">Link 1</a>
-                <a href="#" class="grid-item" target="_blank">Link 2</a>
-                <a href="#" class="grid-item" target="_blank">Link 3</a>
-                <a href="#" class="grid-item" target="_blank">Link 1</a>
-                <a href="#" class="grid-item" target="_blank">Link 2</a>
-                <a href="#" class="grid-item" target="_blank">Link 3</a>
-                <a href="#" class="grid-item" target="_blank">Link 1</a>
-                <a href="#" class="grid-item" target="_blank">Link 2</a>
-                <a href="#" class="grid-item" target="_blank">Link 3</a>
+                <a href="https://www.qdm66.com/" class="grid-item" target="_blank">趣动漫</a>
+                <a href="https://www.mengfan.tv/" class="grid-item" target="_blank">萌番10080P</a>
+                <a href="https://myself-bbs.com/portal.php" class="grid-item" target="_blank">myself</a>
+                <a href="https://www.cycdm01.top/" class="grid-item" target="_blank">次元城</a>
+                <a href="https://www.dqsj.top/" class="grid-item" target="_blank">打驴动漫</a>
+                <a href="https://web.age-spa.com:8443/#/" class="grid-item" target="_blank">AGE动漫</a>
+                <a href="https://www.acfuns.net/" class="grid-item" target="_blank">ACFun动漫</a>
+                <a href="http://m.dodoge.me/" class="grid-item" target="_blank">哔咪哔咪</a>
+                <a href="https://anime.girigirilove.com/" class="grid-item" target="_blank">GriGri爱动漫</a>
             </div>
         </section>
 
@@ -222,7 +269,63 @@
             section.scrollIntoView({ behavior: 'smooth' });
         }
     }
+
+    function performSearch(event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+
+        // Get the selected search engine and search input value
+        var searchEngineSelect = document.getElementById("search-engine");
+        var selectedEngine = searchEngineSelect.options[searchEngineSelect.selectedIndex].value;
+        var searchInputValue = document.getElementById("search-input").value;
+
+        // Generate the search URL based on the selected engine and input value
+        var searchUrl = selectedEngine.replace('%s', encodeURIComponent(searchInputValue));
+
+        // Open a new tab/window with the generated search URL
+        window.open(searchUrl, '_blank');
+    }
 </script>
+<script>
+    function performSearch() {
+        // Get the selected search engine and search input value
+        var searchEngineSelect = document.getElementById("search-engine");
+        var selectedEngine = searchEngineSelect.options[searchEngineSelect.selectedIndex].value;
+        var searchInputValue = document.getElementById("search-input").value;
+
+        // Generate the search URL based on the selected engine and input value
+        var searchUrl = selectedEngine.replace('%s', encodeURIComponent(searchInputValue));
+
+        // Open a new tab/window with the generated search URL
+        window.open(searchUrl, '_blank');
+    }
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var gridItems = document.querySelectorAll(".grid-item");
+
+        gridItems.forEach(function (item) {
+            // Generate a random vibrant color with transparency
+            var randomColor = "rgba(" +
+                Math.floor(Math.random() * 200) + "," +
+                Math.floor(Math.random() * 200) + "," +
+                Math.floor(Math.random() * 200) + "," +
+                0.7 + ")";
+
+            // Apply the random color as the background
+            item.style.backgroundColor = randomColor;
+        });
+
+        // Change title color to a more vibrant color
+        var sectionTitles = document.querySelectorAll("section h2");
+        sectionTitles.forEach(function (title) {
+            title.style.color = "#ff4081"; // You can adjust the color as needed
+        });
+    });
+</script>
+
+
 
 </body>
 </html>
