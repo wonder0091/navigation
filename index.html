@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>导航式网站</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(240,242,245); /* 更雅观的页面背景色 */
+            color: #495057; /* 更深的字体颜色 */
+        }
+
+        header {
+            padding: 5px;
+            background-color: white; /* 更雅观的配色 */
+            color: gray;
+            text-align: center;
+            font-weight: bold; /* 加粗字体 */
+            border-bottom: 1px solid #ddd; /* 底部边框线 */
+        }
+
+        nav {
+            width: 15%; /* 更窄一点的侧边栏 */
+            float: left;
+            font-size: 18px;
+            background-color: white; /* 更雅观的配色 */
+            border: 1px black ;
+            color: black;
+            padding: 20px;
+            box-sizing: border-box;
+            height: 100vh;
+            overflow-y: auto;
+            border-radius: 10px; /* 圆角 */
+            margin-top: 20px; /* 上边距 */
+            margin-bottom: 10px; /* 下边距 */
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+
+        main {
+            width: 85%; /* 更宽一点的主内容区域 */
+            float: left;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-gap: 20px;
+        }
+
+        .grid-item {
+            padding: 15px;
+            text-align: center;
+            color: #495057; /* 更深的字体颜色 */
+            text-decoration: none;
+            display: block;
+            border-radius: 10px; /* 圆角 */
+            background-color: #fff; /* 白色背景 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+            transition: box-shadow 0.3s; /* 添加过渡效果 */
+            transition: background-color 0.3s; /* 添加过渡效果 */
+        }
+
+        .grid-item:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 移入时的阴影效果 */
+            background-color: #f1f1f1; /* 移入时的背景色 */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h3>导航式网站</h3>
+</header>
+
+<nav>
+    <ul>
+        <li onclick="scrollToSection('section1')">Section 1</li>
+        <li onclick="scrollToSection('section2')">Section 2</li>
+        <li onclick="scrollToSection('section3')">Section 3</li>
+    </ul>
+</nav>
+
+<main>
+    <section id="section1">
+        <h2>Section 1</h2>
+        <div class="grid-container">
+            <a href="#" class="grid-item" target="_blank">Link 1</a>
+            <a href="#" class="grid-item" target="_blank">Link 2</a>
+            <a href="#" class="grid-item" target="_blank">Link 3</a>
+        </div>
+    </section>
+
+    <section id="section2">
+        <h2>Section 2</h2>
+        <div class="grid-container">
+            <a href="#" class="grid-item" target="_blank">Link 4</a>
+            <a href="#" class="grid-item" target="_blank">Link 5</a>
+            <a href="#" class="grid-item" target="_blank">Link 6</a>
+        </div>
+    </section>
+
+    <section id="section3">
+        <h2>Section 3</h2>
+        <div class="grid-container">
+            <a href="#" class="grid-item" target="_blank">Link 7</a>
+            <a href="#" class="grid-item" target="_blank">Link 8</a>
+            <a href="#" class="grid-item" target="_blank">Link 9</a>
+        </div>
+    </section>
+</main>
+
+<script>
+    function scrollToSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        if (section) {
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+</script>
+
+</body>
+</html>
