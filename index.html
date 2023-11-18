@@ -9,32 +9,30 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: rgb(240,242,245); /* 更雅观的页面背景色 */
+            background-color: #f8f9fa; /* 更雅观的页面背景色 */
             color: #495057; /* 更深的字体颜色 */
         }
 
         header {
-            padding: 5px;
-            background-color: white; /* 更雅观的配色 */
-            color: gray;
+            background-color: #007bff; /* 更雅观的配色 */
+            color: #fff;
             text-align: center;
+            padding: 10px 0; /* 更小的上下内边距 */
             font-weight: bold; /* 加粗字体 */
             border-bottom: 1px solid #ddd; /* 底部边框线 */
         }
 
         nav {
-            width: 15%; /* 更窄一点的侧边栏 */
-            float: left;
-            font-size: 18px;
-            background-color: white; /* 更雅观的配色 */
-            border: 1px black ;
-            color: black;
-            padding: 20px;
-            box-sizing: border-box;
+            width: 30%; /* 固定宽度为30% */
+            position: fixed; /* 固定定位 */
             height: 100vh;
             overflow-y: auto;
-            border-radius: 10px; /* 圆角 */
-            margin-top: 20px; /* 上边距 */
+            background-color: #007bff; /* 更雅观的配色 */
+            color: #fff;
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 0 10px 10px 0; /* 圆角，只有右上和右下两个角是圆角 */
+            margin-top: 10px; /* 上边距 */
             margin-bottom: 10px; /* 下边距 */
         }
 
@@ -49,10 +47,11 @@
         }
 
         main {
-            width: 85%; /* 更宽一点的主内容区域 */
-            float: left;
+            width: 70%; /* 固定宽度为70% */
+            float: right; /* 右浮动 */
             padding: 20px;
             box-sizing: border-box;
+            margin-top: 50px; /* 考虑固定菜单的高度 */
         }
 
         section {
@@ -87,7 +86,7 @@
 <body>
 
 <header>
-    <h3>导航式网站</h3>
+    <h1>导航式网站</h1>
 </header>
 
 <nav>
