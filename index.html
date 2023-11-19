@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>导航式网站</title>
+    <link rel="icon" href="https://txc.gtimg.com/data/608269/2023/1119/7011701ed0d22db59a39dff51a2cccf8.png">
+    <title>导航</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -182,6 +183,22 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 移入时的阴影效果 */
             background-color: #f1f1f1; /* 移入时的背景色 */
         }
+
+        #bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 5px;
+            background-color: rgb(240,242,245); /* Set the background color for the bottom bar */
+            text-align: center;
+            color: black; /* Set the default text color */
+        }
+
+        #bottom-bar span {
+            /* Automatically adapt text color based on the background */
+            color: inherit;
+        }
     </style>
 </head>
 <body>
@@ -206,12 +223,14 @@
     <!-- Left menu container -->
     <div id="left-container">
         <ul>
-            <li onclick="scrollToSection('section1')">在线动漫</li>
-            <li onclick="scrollToSection('section2')">动漫下载</li>
-            <li onclick="scrollToSection('section3')">S3</li>
-            <li onclick="scrollToSection('section4')">S4</li>
-            <li onclick="scrollToSection('section5')">S5</li>
-            <li onclick="scrollToSection('section6')">S6</li>
+            <li onclick="scrollToSection('section1')">在线</li>
+            <li onclick="scrollToSection('section2')">下载</li>
+            <li onclick="scrollToSection('section3')">影视</li>
+            <li onclick="scrollToSection('section4')">找出处</li>
+            <li onclick="scrollToSection('section5')">网盘BT</li>
+            <li onclick="scrollToSection('section6')">GAL</li>
+            <li onclick="scrollToSection('section7')">漫画</li>
+            <li onclick="scrollToSection('section8')">小说</li>
         </ul>
     </div>
 
@@ -283,79 +302,456 @@
         </section>
 
         <section id="section2">
-            <h2>Section 2</h2>
+            <h2>动漫下载</h2>
             <div class="grid-container">
-                <a href="#" class="grid-item" target="_blank">Link 1</a>
-                <a href="#" class="grid-item" target="_blank">Link 2</a>
-                <a href="#" class="grid-item" target="_blank">Link 3</a>
-                <a href="#" class="grid-item" target="_blank">Link 1</a>
-                <a href="#" class="grid-item" target="_blank">Link 2</a>
-                <a href="#" class="grid-item" target="_blank">Link 3</a>
-                <a href="#" class="grid-item" target="_blank">Link 1</a>
-                <a href="#" class="grid-item" target="_blank">Link 2</a>
-                <a href="#" class="grid-item" target="_blank">Link 3</a>
+                <a href="https://dmhy.gate.flag.moe/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">动</div>
+                        <div class="text-content">动漫花园</div>
+                    </div>
+                </a>
+
+                <a href="https://dongmanhuayuan.myheartsite.com/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">动</div>
+                        <div class="text-content">动漫花园镜像</div>
+                    </div>
+                </a>
+
+
+                <a href="https://www.yxdmgo.com/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">怡</div>
+                        <div class="text-content">怡萱动漫</div>
+                    </div>
+                </a>
+
+                <a href="https://www.acgndog.com//" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">次</div>
+                        <div class="text-content">次元狗</div>
+                    </div>
+                </a>
+                <a href="https://www.tsdm39.com/forum.php" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">天</div>
+                        <div class="text-content">天使动漫论坛</div>
+                    </div>
+                </a>
+                <a href="https://vcb-s.com/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">V</div>
+                        <div class="text-content">VCB-S</div>
+                    </div>
+                </a>
+                <a href="http://www.2cycd.com/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">二</div>
+                        <div class="text-content">二次元虫洞</div>
+                    </div>
+                </a>
+                <a href="https://mikanime.tv/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">蜜</div>
+                        <div class="text-content">蜜柑计划</div>
+                    </div>
+                </a>
+                <a href="https://www.hacg.lv/wp/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">琉</div>
+                        <div class="text-content">琉璃神社 ★ HACG.me </div>
+                    </div>
+                </a>
+                <a href="https://nyaa.si/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">N</div>
+                        <div class="text-content">NYAA</div>
+                    </div>
+                </a>
+                <a href="https://bbs.acgrip.com/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">A</div>
+                        <div class="text-content">Anime字幕论坛 </div>
+                    </div>
+                </a>
             </div>
         </section>
 
         <section id="section3">
-            <h2>Section 3</h2>
+            <h2>影视网站</h2>
             <div class="grid-container">
-                <a href="#" class="grid-item" target="_blank">Link 1</a>
-                <a href="#" class="grid-item" target="_blank">Link 2</a>
-                <a href="#" class="grid-item" target="_blank">Link 3</a>
-                <a href="#" class="grid-item" target="_blank">Link 1</a>
-                <a href="#" class="grid-item" target="_blank">Link 2</a>
-                <a href="#" class="grid-item" target="_blank">Link 3</a>
-                <a href="#" class="grid-item" target="_blank">Link 1</a>
-                <a href="#" class="grid-item" target="_blank">Link 2</a>
-                <a href="#" class="grid-item" target="_blank">Link 3</a>
+                <a href="https://www.ikanbot.com/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">爱</div>
+                        <div class="text-content">爱看机器人</div>
+                    </div>
+                </a>
+
+                <a href="https://ddys.pro/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">低</div>
+                        <div class="text-content">低端影视</div>
+                    </div>
+                </a>
+
+                <a href="https://soupian.pro" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">搜</div>
+                        <div class="text-content">搜片.com</div>
+                    </div>
+                </a>
+                <a href="https://cupfox.app/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">茶</div>
+                        <div class="text-content">茶杯狐</div>
+                    </div>
+                </a>
+
+                <a href="https://www.btnull.org/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">B</div>
+                        <div class="text-content">BTNULL</div>
+                    </div>
+                </a>
+
+                <a href="https://www.yanaifei.net/vod/type/1.html" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">鸭</div>
+                        <div class="text-content">鸭奈飞</div>
+                    </div>
+                </a>
+                <a href="https://www.555dyy14.com/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">5</div>
+                        <div class="text-content">555电影网</div>
+                    </div>
+                </a>
+                <a href="https://www.kpkuang.fun/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">看</div>
+                        <div class="text-content">看片狂人 </div>
+                    </div>
+                </a>
+                <a href="https://www.dy2018.com/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">电</div>
+                        <div class="text-content">电影天堂</div>
+                    </div>
+                </a>
+                <a href="http://www.bd2121.com/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">B</div>
+                        <div class="text-content">BD影视分享</div>
+                    </div>
+                </a>
+                <a href="https://www.meijutt.tv/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">美</div>
+                        <div class="text-content">美剧天堂</div>
+                    </div>
+                </a>
+                <a href="https://subhd.tv/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">下</div>
+                        <div class="text-content">下载字幕 - SubHD </div>
+                    </div>
+                </a>
+
             </div>
         </section>
 
         <section id="section4">
-            <h2>Section 4   </h2>
+            <h2>找出处</h2>
             <div class="grid-container">
-                <a href="#" class="grid-item" target="_blank">Link 1</a>
-                <a href="#" class="grid-item" target="_blank">Link 2</a>
-                <a href="#" class="grid-item" target="_blank">Link 3</a>
-                <a href="#" class="grid-item" target="_blank">Link 1</a>
-                <a href="#" class="grid-item" target="_blank">Link 2</a>
-                <a href="#" class="grid-item" target="_blank">Link 3</a>
-                <a href="#" class="grid-item" target="_blank">Link 1</a>
-                <a href="#" class="grid-item" target="_blank">Link 2</a>
-                <a href="#" class="grid-item" target="_blank">Link 3</a>
+                <a href="https://trace.moe/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">以</div>
+                        <div class="text-content">以图识番</div>
+                    </div>
+                </a>
+
+                <a href="https://soutubot.moe//" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">搜</div>
+                        <div class="text-content">搜图Bot酱 -找本子</div>
+                    </div>
+                </a>
+
+                <a href="https://yandex.ru/images/search?redircnt=1534581013.1" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">Y</div>
+                        <div class="text-content">Yandex识图</div>
+                    </div>
+                </a>
+                <a href="https://ai.animedb.cn/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">A</div>
+                        <div class="text-content">AnimeTrace</div>
+                    </div>
+                </a>
+
+                <a href="https://saucenao.com/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">S</div>
+                        <div class="text-content">SauceNAO</div>
+                    </div>
+                </a>
+
+                <a href="http://dialogue.moe/search" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">D</div>
+                        <div class="text-content">Dialogue-动漫台词</div>
+                    </div>
+                </a>
+                <a href="https://as2.bitinn.net/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">A</div>
+                        <div class="text-content">AnimeShot </div>
+                    </div>
+                </a>
+                <a href="https://33.agilestudio.cn/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">3</div>
+                        <div class="text-content">33台词</div>
+                    </div>
+                </a>
             </div>
         </section>
 
         <section id="section5">
-            <h2>Section 5</h2>
+            <h2>找网盘、磁力</h2>
             <div class="grid-container">
-                <a href="#" class="grid-item" target="_blank">Link 1</a>
-                <a href="#" class="grid-item" target="_blank">Link 2</a>
-                <a href="#" class="grid-item" target="_blank">Link 3</a>
-                <a href="#" class="grid-item" target="_blank">Link 1</a>
-                <a href="#" class="grid-item" target="_blank">Link 2</a>
-                <a href="#" class="grid-item" target="_blank">Link 3</a>
-                <a href="#" class="grid-item" target="_blank">Link 1</a>
-                <a href="#" class="grid-item" target="_blank">Link 2</a>
-                <a href="#" class="grid-item" target="_blank">Link 3</a>
+                <a href="https://yunpan1.cc/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">云</div>
+                        <div class="text-content">云盘分享</div>
+                    </div>
+                </a>
+
+                <a href="https://wpxz.top/t/tv" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">阿</div>
+                        <div class="text-content">阿里云盘资源共享</div>
+                    </div>
+                </a>
+
+                <a href="http://www.xgsoso.com/?st=0" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">西</div>
+                        <div class="text-content">西瓜盘搜索引擎</div>
+                    </div>
+                </a>
+                <a href="https://www.magicalsearch.top/main?ref=www.jspoo.com" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">奇</div>
+                        <div class="text-content">奇妙搜索</div>
+                    </div>
+                </a>
+
+                <a href="https://www.tianyiso.coma/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">天</div>
+                        <div class="text-content">天逸搜 </div>
+                    </div>
+                </a>
+
+                <a href="https://www.btsearch.love/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">B</div>
+                        <div class="text-content">BTSearch | 磁力搜索引擎 </div>
+                    </div>
+                </a>
+                <a href="https://lemongb.top/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">柠</div>
+                        <div class="text-content">柠檬磁力</div>
+                    </div>
+                </a>
+                <a href="https://yiyun.lanzout.com/iSyPb12rh4bi" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">磁</div>
+                        <div class="text-content">磁力搜PC</div>
+                    </div>
+                </a>
             </div>
         </section>
 
         <section id="section6">
-            <h2>Section 6</h2>
+            <h2>GALGME下载</h2>
             <div class="grid-container">
-                <a href="#" class="grid-item" target="_blank">Link 1</a>
-                <a href="#" class="grid-item" target="_blank">Link 2</a>
-                <a href="#" class="grid-item" target="_blank">Link 3</a>
-                <a href="#" class="grid-item" target="_blank">Link 1</a>
-                <a href="#" class="grid-item" target="_blank">Link 2</a>
-                <a href="#" class="grid-item" target="_blank">Link 3</a>
-                <a href="#" class="grid-item" target="_blank">Link 1</a>
-                <a href="#" class="grid-item" target="_blank">Link 2</a>
-                <a href="#" class="grid-item" target="_blank">Link 3</a>
+                <a href="https://www.ttloli.com" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">忧</div>
+                        <div class="text-content">忧郁的萝莉</div>
+                    </div>
+                </a>
+
+                <a href="https://bbs.9dkf.com/login.php" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">绯</div>
+                        <div class="text-content">绯月论坛</div>
+                    </div>
+                </a>
+
+                <a href="https://www.gogalgame.com/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">绅</div>
+                        <div class="text-content">绅士天堂</div>
+                    </div>
+                </a>
+                <a href="https://xn--9iq009hj5c.xyz/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">缘</div>
+                        <div class="text-content">缘之空 </div>
+                    </div>
+                </a>
+
+                <a href="https://www.galxp.com/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">G</div>
+                        <div class="text-content">GALXP分享你的XP</div>
+                    </div>
+                </a>
+
+                <a href="www.lzacg.net/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">量</div>
+                        <div class="text-content">量子ACG </div>
+                    </div>
+                </a>
+                <a href="https://lemongb.top/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">柠</div>
+                        <div class="text-content">柠檬磁力</div>
+                    </div>
+                </a>
             </div>
         </section>
+
+        <section id="section7">
+            <h2>漫画</h2>
+            <div class="grid-container">
+                <a href="https://nicohub.cc/index" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">N</div>
+                        <div class="text-content">Nico</div>
+                    </div>
+                </a>
+
+                <a href="https://tw.manhuagui.com/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">漫</div>
+                        <div class="text-content">漫画柜</div>
+                    </div>
+                </a>
+
+                <a href="https://www.mangacopy.com/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">拷</div>
+                        <div class="text-content">拷贝漫画</div>
+                    </div>
+                </a>
+                <a href="https://www.zuimh.com/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">最</div>
+                        <div class="text-content">最漫画</div>
+                    </div>
+                </a>
+
+                <a href="https://www.colamanga.com/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">C</div>
+                        <div class="text-content">COLAMANGA 漫画</div>
+                    </div>
+                </a>
+
+                <a href="https://komiic.com/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">量</div>
+                        <div class="text-content">最夯 | Komiic漫畫</div>
+                    </div>
+                </a>
+                <a href="https://www.mh160.cc/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">漫</div>
+                        <div class="text-content">漫画160</div>
+                    </div>
+                </a>
+            </div>
+        </section>
+        <section id="section8">
+            <h2>小说</h2>
+            <div class="grid-container">
+                <a href="https://masiro.me/admin" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">真</div>
+                        <div class="text-content">真白萌 </div>
+                    </div>
+                </a>
+
+                <a href="https://www.linovelib.com/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">哔</div>
+                        <div class="text-content">哔哩轻小说</div>
+                    </div>
+                </a>
+
+                <a href="https://www.lightnovel.app/home" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">轻</div>
+                        <div class="text-content">轻书架</div>
+                    </div>
+                </a>
+                <a href="https://www.lightnovel.us/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">轻</div>
+                        <div class="text-content">轻之国度</div>
+                    </div>
+                </a>
+
+                <a href="http://www.shencou.com/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">神</div>
+                        <div class="text-content">神凑轻小说</div>
+                    </div>
+                </a>
+
+                <a href="https://www.23qb.net/lightnovel/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">铅</div>
+                        <div class="text-content">铅笔小说</div>
+                    </div>
+                </a>
+                <a href="https://zlibrary-jp.se/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">Z</div>
+                        <div class="text-content">Z-Library - 世界最大の電子書籍 </div>
+                    </div>
+                </a>
+
+                <a href="https://www.huangdizhijia.com/index.html" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">Z</div>
+                        <div class="text-content">网文txt下载</div>
+                    </div>
+                </a>
+                <a href="https://m.baoshu7.com/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">宝</div>
+                        <div class="text-content">宝书网-TXT小说下载</div>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <div id="bottom-bar">
+        <span>
+            本站所有内容来自互联网收集，侵权即删 &nbsp;&nbsp;&nbsp;&nbsp;
+            联系邮箱：wonder0091@gmail.com &nbsp;&nbsp;&nbsp;&nbsp;
+            QQ群:577677137
+
+        </span>
     </div>
 </div>
 
@@ -406,7 +802,6 @@
         performSearch();
     });
 </script>
-
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function () {
         var gridItems = document.querySelectorAll(".square-bg");
