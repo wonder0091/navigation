@@ -45,6 +45,7 @@
 
         #search-input{
             width: 50%;
+            height: 30px;
             border: 0;
             border-radius: 10px; /* 圆角 */
             outline: none;
@@ -68,7 +69,7 @@
         /* Left menu styling */
 
         #left-container {
-            width: 15%; /* 更窄一点的侧边栏 */
+            width: 17%; /* 更窄一点的侧边栏 */
             font-size: 18px;
             background-color: white; /* 更雅观的配色 */
             border: 1px black;
@@ -84,6 +85,25 @@
             top: 40px; /* Adjust as needed based on header height */
             bottom: 0;
         }
+        /* 添加媒体查询 */
+        @media screen and (max-width: 767px) {
+            #left-container {
+                width: 100%; /* 在手机屏幕上设置宽度为100% */
+
+                padding: 5px; /* 调整手机屏幕上的 padding */
+            }
+
+            #left-container ul {
+                display: flex;
+                flex-wrap: wrap; /* 允许在行尾换行 */
+                justify-content: space-between; /* 在每行间距相等分布 */
+            }
+
+            #left-container li {
+                width: 80%; /* 每个 li 元素占据的宽度，留有一些间距 */
+                margin-bottom: 10px; /* 底部间距 */
+            }
+        }
 
         ul {
             list-style: none;
@@ -97,7 +117,7 @@
 
         /* Right content styling */
         #right-container {
-            width: 83%; /* 更宽一点的主内容区域 */
+            width: 80%; /* 更宽一点的主内容区域 */
             box-sizing: border-box;
             padding: 10px;
             overflow-y: auto;
@@ -120,17 +140,43 @@
         }
 
         .grid-item {
-            padding: 15px;
+            padding: 12px;
             text-align: center;
             color: black; /* 更深的字体颜色 */
             font-weight: bold;
             text-decoration: none;
             display: block;
             border-radius: 10px; /* 圆角 */
-            background-color:rgb(195,187,196,0.5);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+            background-color: white; /* rgb(195,187,196,0.5);  */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
             transition: box-shadow 0.3s, background-color 0.3s; /* 合并过渡效果属性 */
         }
+        .content {
+            display: flex;
+            align-items: center;
+            justify-content: left;
+        }
+
+        .square-bg {
+            width: 30px;
+            height: 30px;
+            color: white;
+            background-color: rgba(195, 187, 196, 0.5); /* 默认背景色 */
+            border-radius: 10px; /* 圆角 */
+            margin-right: 10px; /* 两个空格的距离 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .text-content {
+            color: rgb(128, 128, 144); /* 字体颜色 */
+            max-width: calc(100% - 40px); /* 限制文本内容的最大宽度 */
+            overflow: hidden;
+            text-overflow: ellipsis; /* 在超过宽度时显示省略号 */
+            white-space: nowrap; /* 不换行 */
+        }
+
 
         .grid-item:hover {
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 移入时的阴影效果 */
@@ -143,15 +189,17 @@
 <div id="main-container">
     <header>
         <div id="header-content">
-            <div>
-                <select id="search-engine">
-                    <option value="https://www.baidu.com/s?wd=%s&ie=utf-8">百度</option>
-                    <option value="https://www.google.com/search?q=%s&ie=utf-8&oe=utf-8">谷歌</option>
-                    <option value="https://cn.bing.com/search?q=%s">必应</option>
-                </select>
-                <input type="text" id="search-input" placeholder="Search...">
-                <button onclick="performSearch()">🔍</button>
-            </div>
+            <form id="search-form">
+                <div>
+                    <select id="search-engine">
+                        <option value="https://www.baidu.com/s?wd=%s&ie=utf-8">百度</option>
+                        <option value="https://www.google.com/search?q=%s&ie=utf-8&oe=utf-8">谷歌</option>
+                        <option value="https://cn.bing.com/search?q=%s">必应</option>
+                    </select>
+                    <input type="search" id="search-input" placeholder="Search...">
+                    <button onclick="performSearch()">🔍</button>
+                </div>
+            </form>
         </div>
     </header>
 
@@ -159,7 +207,7 @@
     <div id="left-container">
         <ul>
             <li onclick="scrollToSection('section1')">在线动漫</li>
-            <li onclick="scrollToSection('section2')">S2</li>
+            <li onclick="scrollToSection('section2')">动漫下载</li>
             <li onclick="scrollToSection('section3')">S3</li>
             <li onclick="scrollToSection('section4')">S4</li>
             <li onclick="scrollToSection('section5')">S5</li>
@@ -173,15 +221,64 @@
         <section id="section1">
             <h2>在线动漫</h2>
             <div class="grid-container">
-                <a href="https://www.qdm66.com/" class="grid-item" target="_blank">趣动漫</a>
-                <a href="https://www.mengfan.tv/" class="grid-item" target="_blank">萌番10080P</a>
-                <a href="https://myself-bbs.com/portal.php" class="grid-item" target="_blank">myself</a>
-                <a href="https://www.cycdm01.top/" class="grid-item" target="_blank">次元城</a>
-                <a href="https://www.dqsj.top/" class="grid-item" target="_blank">打驴动漫</a>
-                <a href="https://web.age-spa.com:8443/#/" class="grid-item" target="_blank">AGE动漫</a>
-                <a href="https://www.acfuns.net/" class="grid-item" target="_blank">ACFun动漫</a>
-                <a href="http://m.dodoge.me/" class="grid-item" target="_blank">哔咪哔咪</a>
-                <a href="https://anime.girigirilove.com/" class="grid-item" target="_blank">GriGri爱动漫</a>
+                <a href="https://www.qdm66.com/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">趣</div>
+                        <div class="text-content">趣动漫</div>
+                    </div>
+                </a>
+
+                <a href="https://www.mengfan.tv/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">萌</div>
+                        <div class="text-content">萌番10080P</div>
+                    </div>
+                </a>
+
+
+                <a href="https://myself-bbs.com/portal.php" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">m</div>
+                        <div class="text-content">myself</div>
+                    </div>
+                </a>
+
+                <a href="https://www.cycdm01.top/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">次</div>
+                        <div class="text-content">次元城</div>
+                    </div>
+                </a>
+                <a href="https://www.dqsj.top/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">打</div>
+                        <div class="text-content">打驴动漫</div>
+                    </div>
+                </a>
+                <a href="https://web.age-spa.com:8443/#/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">A</div>
+                        <div class="text-content">AGE动漫</div>
+                    </div>
+                </a>
+                <a href="https://www.acfuns.net/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">A</div>
+                        <div class="text-content">ACFun动漫</div>
+                    </div>
+                </a>
+                <a href="http://m.dodoge.me/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">哔</div>
+                        <div class="text-content">哔咪哔咪</div>
+                    </div>
+                </a>
+                <a href="https://anime.girigirilove.com/" class="grid-item" target="_blank">
+                    <div class="content">
+                        <div class="square-bg">G</div>
+                        <div class="text-content">GriGri爱动漫</div>
+                    </div>
+               </a>
             </div>
         </section>
 
@@ -262,7 +359,7 @@
     </div>
 </div>
 
-<script>
+<script type="text/javascript">
     function scrollToSection(sectionId) {
         const section = document.getElementById(sectionId);
         if (section) {
@@ -271,39 +368,48 @@
     }
 
     function performSearch(event) {
+        var searchEngineSelect = document.getElementById("search-engine");
+        var selectedEngine = searchEngineSelect.options[searchEngineSelect.selectedIndex].value;
+        var searchInputValue = document.getElementById("search-input").value;
+
+        var searchUrl = selectedEngine.replace('%s', encodeURIComponent(searchInputValue));
+
+        window.open(searchUrl, '_blank');
+    }
+
+    // Add event listener for form submission
+    document.getElementById("search-form").addEventListener("submit", function (event) {
         // Prevent the default form submission behavior
         event.preventDefault();
 
-        // Get the selected search engine and search input value
-        var searchEngineSelect = document.getElementById("search-engine");
-        var selectedEngine = searchEngineSelect.options[searchEngineSelect.selectedIndex].value;
-        var searchInputValue = document.getElementById("search-input").value;
-
-        // Generate the search URL based on the selected engine and input value
-        var searchUrl = selectedEngine.replace('%s', encodeURIComponent(searchInputValue));
-
-        // Open a new tab/window with the generated search URL
-        window.open(searchUrl, '_blank');
-    }
+        // Perform the search when the form is submitted
+        performSearch();
+    });
 </script>
-<script>
+<script type="text/javascript">
     function performSearch() {
-        // Get the selected search engine and search input value
         var searchEngineSelect = document.getElementById("search-engine");
         var selectedEngine = searchEngineSelect.options[searchEngineSelect.selectedIndex].value;
         var searchInputValue = document.getElementById("search-input").value;
 
-        // Generate the search URL based on the selected engine and input value
         var searchUrl = selectedEngine.replace('%s', encodeURIComponent(searchInputValue));
 
-        // Open a new tab/window with the generated search URL
         window.open(searchUrl, '_blank');
     }
+
+    // Add event listener for form submission
+    document.getElementById("search-form").addEventListener("submit", function (event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+
+        // Perform the search when the form is submitted
+        performSearch();
+    });
 </script>
 
-<script>
+<script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function () {
-        var gridItems = document.querySelectorAll(".grid-item");
+        var gridItems = document.querySelectorAll(".square-bg");
 
         gridItems.forEach(function (item) {
             // Generate a random vibrant color with transparency
