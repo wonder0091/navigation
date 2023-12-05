@@ -217,6 +217,22 @@
 	height:30px;
 }
 	a{text-decoration: none;color:skyblue;}
+
+/* 自定义工具提示样式 */
+    .tooltip {
+        display: none; /* 默认不显示 */
+        position: absolute; /* 绝对定位 */
+        padding: 5px;
+        background: #000;
+        color: #fff;
+        border-radius: 5px;
+        font-size: 12px;
+        z-index: 1000; /* 确保提示框在最上面 */
+    }
+    
+    /* 显示工具提示 */
+    .show-tooltip {
+        display: block;
     </style>
 </head>
 <body>
@@ -803,6 +819,8 @@
 
     </div>
 
+<!-- 工具提示的占位元素 -->
+<div class="tooltip" id="tooltip"></div>
 
 </div>
 
@@ -875,6 +893,42 @@
             title.style.color = "#ff4081"; // You can adjust the color as needed
         });
     });
+</script>
+
+
+<script>
+// 获取所有有title属性的a标签
+var tooltips = document.querySelectorAll('a[title]');
+
+// 为每个a标签添加触摸事件监听器
+tooltips.forEach(function(item) {
+    item.addEventListener('touchstart', function(e) {
+        // 防止链接默认行为
+        e.preventDefault();
+        
+        // 获取title属性值
+        var titleText = this.getAttribute('title');
+        
+        // 如果没有title属性，或者它是空的，就什么都不做
+        if (!titleText) return;
+        
+        // 找到工具提示元素并设置内容
+        var tooltip = document.getElementById('tooltip');
+        tooltip.textContent = titleText;
+        
+        // 计算位置并显示工具提示
+        var rect = this.getBoundingClientRect();
+        tooltip.style.left = rect.left + "px";
+        tooltip.style.top = rect.top - tooltip.offsetHeight + "px";
+        tooltip.className = 'tooltip show-tooltip';
+    });
+    
+    item.addEventListener('touchend', function() {
+        // 隐藏工具提示
+        var tooltip = document.getElementById('tooltip');
+        tooltip.className = 'tooltip';
+    });
+});
 </script>
 
 
