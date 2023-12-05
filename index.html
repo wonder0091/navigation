@@ -184,6 +184,9 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 移入时的阴影效果 */
             background-color: #f1f1f1; /* 移入时的背景色 */
         }
+	.grid-item:hover .tooltip{
+            display: block;
+        }
 
         #bottom-bar {
             /*position: fixed;*/
@@ -900,34 +903,33 @@
 // 获取所有有title属性的a标签
 var tooltips = document.querySelectorAll('a[title]');
 
-// 为每个a标签添加触摸事件监听器
+// 为每个a标签添加鼠标进入和鼠标离开的事件监听器
 tooltips.forEach(function(item) {
-    item.addEventListener('contextmenu', function(e) {
-        // 防止链接默认的上下文菜单显示
-        e.preventDefault();
-        
+    item.addEventListener('mouseenter', function(e) {
         // 获取title属性值
         var titleText = this.getAttribute('title');
         
         // 如果没有title属性，或者它是空的，就什么都不做
         if (!titleText) return;
         
-        // 找到工具提示元素并设置内容
-        var tooltip = document.getElementById('tooltip');
+        // 创建一个新的tooltip元素
+        var tooltip = document.createElement('div');
+        tooltip.className = 'tooltip';
         tooltip.textContent = titleText;
-        
+        document.body.appendChild(tooltip);
+
         // 计算位置并显示工具提示
         var rect = this.getBoundingClientRect();
         tooltip.style.left = rect.left + "px";
-        tooltip.style.top = rect.top - tooltip.offsetHeight + "px";
-        tooltip.className = 'tooltip show-tooltip';
+        tooltip.style.top = rect.bottom + "px";
     });
     
-    // 监听触摸结束事件来隐藏工具提示
-    item.addEventListener('touchend', function() {
-        // 隐藏工具提示
-        var tooltip = document.getElementById('tooltip');
-        tooltip.className = 'tooltip';
+    item.addEventListener('mouseleave', function() {
+        // 查找并移除工具提示
+        var tooltip = document.querySelector('.tooltip');
+        if (tooltip) {
+            tooltip.remove();
+        }
     });
 });
 </script>
