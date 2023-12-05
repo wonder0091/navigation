@@ -902,8 +902,8 @@ var tooltips = document.querySelectorAll('a[title]');
 
 // 为每个a标签添加触摸事件监听器
 tooltips.forEach(function(item) {
-    item.addEventListener('touchstart', function(e) {
-        // 防止链接默认行为
+    item.addEventListener('contextmenu', function(e) {
+        // 防止链接默认的上下文菜单显示
         e.preventDefault();
         
         // 获取title属性值
@@ -923,6 +923,7 @@ tooltips.forEach(function(item) {
         tooltip.className = 'tooltip show-tooltip';
     });
     
+    // 监听触摸结束事件来隐藏工具提示
     item.addEventListener('touchend', function() {
         // 隐藏工具提示
         var tooltip = document.getElementById('tooltip');
