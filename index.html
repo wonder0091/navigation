@@ -70,6 +70,11 @@
         }
         /* Left menu styling */
 
+        #menu  li{
+            
+            font-weight:bold;
+}
+
         #left-container {
             width: 17%; /* 更窄一点的侧边栏 */
             font-size: 18px;
@@ -240,6 +245,24 @@
     /* 显示工具提示 */
     .show-tooltip {
         display: block;
+}
+
+    h2 {
+position: relative;
+padding-left: 15px;
+color: #f66a37;
+font-weight: 700;
+
+    &:after {
+        content: " ";
+        width: 4px;
+        height: 20px;
+        background: #12a3f5;
+        position: absolute;
+        left: 0;
+        top: 7px;
+        border-radius: 2px;
+    }
     </style>
 </head>
 <body>
@@ -273,7 +296,7 @@
 
     <!-- Left menu container -->
     <div id="left-container">
-        <ul>
+        <ul id="menu">
             <li onclick="scrollToSection('section1')">在线</li>
             <li onclick="scrollToSection('section2')">下载</li>
             <li onclick="scrollToSection('section3')">影视</li>
@@ -901,10 +924,7 @@
         });
 
         // Change title color to a more vibrant color
-        var sectionTitles = document.querySelectorAll("section h2");
-        sectionTitles.forEach(function (title) {
-            title.style.color = "#ff4081"; // You can adjust the color as needed
-        });
+     
     });
 </script>
 
