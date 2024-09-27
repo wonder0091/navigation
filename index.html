@@ -261,6 +261,58 @@ font-weight: 700;
         top: 8px;
         border-radius: 2px;
     }
+#searchButton {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 10px;
+}
+   #searchOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.8);
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+    }
+
+    #searchInput {
+    padding: 5px;
+    margin-right: 5px;
+    }
+
+    #searchOverlay button {
+    padding: 5px 10px;
+    margin-left: 5px;
+    }
+
+    @media (max-width: 768px) {
+    #searchButton {
+        right: 10px;
+        bottom: 10px;
+    }
+    
+    #searchOverlay {
+        flex-direction: column;
+    }
+    
+    #searchOverlay button {
+        margin-top: 5px;
+    }
+    }	    
+	    
     </style>
 </head>
 <body>
@@ -873,7 +925,14 @@ font-weight: 700;
 
 <!-- 工具提示的占位元素 -->
 <div class="tooltip" id="tooltip"></div>
-
+<button onclick="topFunction()" id="searchButton" title="回顶部">搜索</button>
+	    <div id="searchOverlay" style="display:none;">
+      <input type="text" id="searchInput" placeholder="输入搜索内容">
+      <button id="searchNext">下一个</button>
+      <button id="searchPrev">上一个</button>
+      <button id="closeSearch">关闭</button>
+    </div>
+	
 </div>
 
 <script type="text/javascript">
@@ -980,7 +1039,87 @@ gridItems.forEach(function(item) {
 });
 </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  const searchButton = document.getElementById('searchButton');
+  const searchOverlay = document.getElementById('searchOverlay');
+  const searchInput = document.getElementById('searchInput');
+  const searchNext = document.getElementById('searchNext');
+  const searchPrev = document.getElementById('searchPrev');
+  const closeSearch = document.getElementById('closeSearch');
 
+  let searchInstance = null;
+  let lastSearchTerm = '';
+  let searchTimeout = null;
+
+  searchButton.addEventListener('click', function() {
+    searchOverlay.style.display = 'flex';
+    searchInput.focus();
+  });
+
+  closeSearch.addEventListener('click', function() {
+    searchOverlay.style.display = 'none';
+    if (searchInstance) {
+      searchInstance.unmark();
+      searchInstance = null;
+    }
+    lastSearchTerm = '';
+    searchInput.value = '';
+  });
+
+  function debounce(func, delay) {
+    return function() {
+      const context = this;
+      const args = arguments;
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(function() {
+        func.apply(context, args);
+      }, delay);
+    };
+  }
+
+  function performSearch() {
+    const searchTerm = searchInput.value.trim();
+    if (searchTerm !== lastSearchTerm) {
+      lastSearchTerm = searchTerm;
+      if (searchTerm && window.find && window.getSelection) {
+        if (searchInstance) {
+          searchInstance.unmark();
+        }
+        searchInstance = new Mark(document.body);
+        searchInstance.mark(searchTerm, {
+          separateWordSearch: false,
+          done: function() {
+            window.find(searchTerm);
+          }
+        });
+      } else if (!searchTerm) {
+        if (searchInstance) {
+          searchInstance.unmark();
+        }
+      }
+    } else if (searchTerm) {
+      window.find(searchTerm);
+    }
+  }
+
+  const debouncedSearch = debounce(performSearch, 300); // 300毫秒的延迟
+
+  searchInput.addEventListener('input', debouncedSearch);
+
+  searchNext.addEventListener('click', function() {
+    if (lastSearchTerm) {
+      window.find(lastSearchTerm);
+    }
+  });
+
+  searchPrev.addEventListener('click', function() {
+    if (lastSearchTerm) {
+      window.find(lastSearchTerm, false, true);
+    }
+  });
+});
 
 </body>
 </html>
