@@ -1,0 +1,409 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(240, 242, 245); 
+    color: #495057; 
+    min-height: 100vh;
+}
+
+h1 {
+    font-size: 2vw; 
+    margin:10px;
+    margin-left: 20px;
+    /* left: 10px; */
+    float: left;
+    position: absolute;
+    font-family: 'Comic Sans MS', cursive;
+    color: #ff69b4;
+    background: linear-gradient(to right, #ffc0cb, #ff69b4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    }
+
+h3 {
+    position: relative;
+    padding-left: 10px;
+    color: #f66a37;
+    font-weight: 700;
+    border-left: 4px solid #12a3f5;    
+    }
+
+    /* 标签筛选按钮  */
+    .filter-buttons {
+        margin-bottom: 15px;
+        @media screen and (max-width: 767px){
+           .filter-btn{
+            font-size:12px;
+            margin-right: 5px;
+        }
+    }
+    }
+    
+    .filter-btn {
+        font-size:14px;
+        padding: 5px 10px;
+        margin-right: 10px;
+        cursor: pointer;
+        background-color: #f0f0f0;
+        border: none;
+        border-radius: 5px;
+    }
+    
+    .filter-btn.active {
+        background-color: rgb(99,44,253);
+        color: white;
+    }
+    
+    
+button {background:none;width:auto;}
+
+#main-container {display: flex;height: 100vh;}
+
+header {
+    width: 100%;
+    height: 60px;
+    padding: 5px;
+    color: gray;
+    text-align: center;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    font-weight: bold;
+    background-color: rgb(240, 242, 245); 
+}
+
+#header-content {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    height: 100%;
+    max-width: 600px; /* 限制最大宽度 */
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+#search-form {
+    display: flex;
+    align-items: center;
+    width: 100%; /* 让表单占满容器宽度 */
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    flex-grow: 1; /* 让搜索容器占据剩余空间 */
+}
+
+#search-engine {
+    border: none;
+    outline: none;
+    padding: 8px;
+    border-radius: 10px 0 0 10px;
+    flex-shrink: 0;
+    background-color: #f8f8f8;
+    width: auto; /* 自适应内容宽度 */
+}
+
+#search-input {
+    flex-grow: 1;
+    height: 31px;
+    border: none;
+    outline: none;
+    padding: 8px;
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    font-size: 16px;
+}
+
+.additional-component {
+    margin-left: 10px; /* 给Telegram按钮一些左边距 */
+}
+
+#tg {
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+    border: none;
+    display: flex;
+    align-items: right;
+    cursor: pointer;
+    margin-left:10px;
+}
+
+/* 移动端适配 */
+@media (max-width: 600px) {
+    h1 {
+        display: none;
+      }
+    #header-content {
+        max-width: 100%;
+    }
+    .search-container { 
+        max-width:99%;
+     }
+    #search-engine {
+        max-width: 25%;
+    }
+
+    #search-input {
+        font-size: 14px;
+    }
+    #tg {margin-right: 10px;}	
+
+}
+
+
+ #menu  li{         
+    font-weight:500;
+ }
+
+#left-container {
+    width: 17%; /* 更窄一点的侧边栏 */
+    font-size: 18px;
+    background-color: white; 
+    border: 1px black;
+    color: rgb(128, 128, 144);
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    border-radius: 18px; 
+    margin-top: 25px; 
+    position: fixed;
+    left: 0;
+    top: 40px;
+    bottom: 0; 
+    overflow: hidden; 
+        }
+        @media screen and (max-width: 767px) {
+            #hd{display: none;}
+
+            #left-container {
+                width: 100%; /* 在手机屏幕上设置宽度为100% */
+                padding: 5px; /* 调整手机屏幕上的 padding */
+            }
+
+            #left-container ul {
+                display: flex;
+                flex-wrap: wrap; /* 允许在行尾换行 */
+                justify-content: space-between; /* 在每行间距相等分布 */
+            }
+
+            #left-container li {
+                width: 80%; /* 每个 li 元素占据的宽度，留有一些间距 */
+	            overflow: hidden; 
+
+
+            }
+        }
+
+ul {
+    list-style: none;
+    margin-top:-10px;
+}
+
+li {
+    margin-bottom: 13px;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+li:selected {
+    background-color: transparent;
+}
+
+#right-container {
+    width: 80%;
+    box-sizing: border-box;
+    padding: 12px;
+    padding-top: [header-height]px;
+    overflow-y: auto;
+    position: fixed;
+    border-radius: 18px;
+    right: 0px;
+    top: 60px;
+    bottom: 0;
+    background-color: white;
+}
+
+section {
+    margin-bottom: 20px;
+    padding-top:2px;	
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 20px;
+}
+
+.grid-item {
+    padding: 12px;
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+    display: block;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s, background-color 0.3s;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.square-bg {
+    width: 30px;
+    height: 30px;
+    color: white;
+    background-color: rgba(195, 187, 196, 0.5);
+    border-radius: 10px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-content {
+    color: rgb(128, 128, 144);
+    max-width: calc(100% - 40px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.grid-item:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #f1f1f1;
+}
+
+.grid-item:hover .tooltip {
+    display: block;
+}
+
+#bottom-bar {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    padding: 5px;
+    line-height: 30px;
+    background-color: rgb(240, 242, 245);
+    text-align: center;
+    color: black;
+    overflow-y: auto;
+}
+
+#bottom-bar span {
+    color: inherit;
+}
+
+
+#menu {
+    list-style: none;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px 3px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+#menu li {
+    white-space: nowrap;
+    font-weight:500;
+    cursor: pointer;
+    color: #333333;
+    padding: 2px;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    justify-content: center;
+}
+
+#menu li:hover {
+    background-color: pink;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#menu li + li {
+    border-top: 1px solid #f1f1f1;
+}
+
+#menu li:active {
+    background-color: skyblue;
+}
+#menu li[selected] {
+    background-color: skyblue;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+    #right-container {margin-right: auto;}
+
+    #menu {
+        width: 20%;
+        max-width: 80%;
+    }
+    #menu li {
+        justify-content: flex-start;
+    }
+}
+
+
+#tg {
+    line-height: 30px;
+      width: 30px;
+      height: 30px;
+    
+  vertical-align: middle;
+  }
+  
+  #tg a img {
+     vertical-align: middle;
+      width: 28px;
+      height: 28px;
+  }
+  
+  a {
+      text-decoration: none;
+      color: skyblue;
+  }
+  
+  
+  .tooltip {
+      display: none;
+      position: absolute;
+      padding: 4px 6px;
+      background: rgba(97, 97, 97, 0.9);
+      color: #fff;
+      border-radius: 4px;
+      font-size: 12px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      transition: opacity 0.3s;
+  }
+  
+  .show-tooltip {
+      display: block;
+  }
+  
