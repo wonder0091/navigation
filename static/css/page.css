@@ -127,7 +127,7 @@ button {
 }
 
 .additional-component {
-    margin-left: 10px; /* 给Telegram按钮一些左边距 */
+    margin-left: 10px;
 }
 
 #tg {
@@ -142,16 +142,15 @@ button {
 }
 
 /* 移动端适配 */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     h1 {
         display: none;
       }
     #header-content {
-        max-width: 95%;
-	    width: 90%;
+        width: 90%;
     }
-    #search-input{
-	width: 95%;    
+    #search-form{
+        /* width: 90%; */
     }
     .search-container { 
         max-width:99%;
@@ -246,12 +245,17 @@ section {
 }
 
 .grid-container {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     grid-gap: 20px;
 }
 
 .grid-item {
+    position: relative;
+    padding-right: 30px;
+    margin-bottom: 10px;
+    display: flex;
     padding: 12px;
     text-align: center;
     color: black;
@@ -263,6 +267,90 @@ section {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     transition: box-shadow 0.3s, background-color 0.3s;
 }
+
+    /*  a标签标题提示  */
+  
+    .tooltip {
+        display: none; /* 默认隐藏 */
+        background-color: rgb(255,255,255);
+        font-size: 13px;
+        font-weight: normal;
+        border: 1px  #ccc;
+        position: absolute;
+        padding: 10px;
+        border-radius: 5px;
+        z-index: 1000;
+        width: 95%;
+        max-width: 300px;
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+        margin-top: 20px; /* 调整margin-top确保与尖角分开 */
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    /* 小尖角 */
+    .tooltip::before {
+        content: "";
+        position: absolute;
+        top: -10px; /* 尖角位置：tooltip 的上方 */
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 10px; /* 尖角大小 */
+        border-style: solid;
+        border-color: transparent transparent white white; /* 背景与 tooltip 相同 */
+    }
+    
+    /* 尖角的边框，确保尖角的边框与 tooltip 边框连为一体 */
+    .tooltip::after {
+        content: "";
+        position: absolute;
+        top: -11px; /* 与 ::before 略微偏移，创建边框效果 */
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 11px; /* 与 tooltip 边框相符的大小 */
+        border-style: solid;
+        border-color: transparent transparent transparent; /* 边框颜色 */
+    }
+    /* 使图标按钮样式适合设计 */
+    .tooltip-btn {
+        display: none;
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        width: 35px;
+        height: 30px;
+        line-height: 25px;
+        border-radius: 50%;
+        color: #007bff;;
+        border: none;
+        cursor: pointer;
+        font-size: 12px;
+        text-align: center;
+        transition: background-color 0.3s ease;
+    }
+    
+    .tooltip-btn:hover {
+        /* background-color: #0056b3; */
+    }
+    
+    .tooltip-btn::before {
+        content: "";
+        
+        font-size: 20px;
+    }
+@media (max-width: 768px) {
+    .tooltip-btn{display: block;}
+    .tooltip {
+       display: flex;
+       justify-content: center;
+       align-items: center;
+     }
+   }
+
+    .show-tooltip {
+        display: block;
+    }
+  
 
 .content {
     display: flex;
@@ -391,23 +479,126 @@ section {
       color: skyblue;
   }
   
-  
-  .tooltip {
-      display: none;
-      position: absolute;
-      padding: 4px 6px;
-      background: rgba(97, 97, 97, 0.9);
-      color: #fff;
-      border-radius: 4px;
-      font-size: 12px;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 0 10px rgba(0, 0, 0, 0.1);
-      z-index: 1000;
-      transition: opacity 0.3s;
-  }
-  
-  .show-tooltip {
-      display: block;
-  }
+
+
+  /*  搜索导航内链接  */
+
+  #openSearchModal {
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    width: 45px;
+    height:45px;
+    background-color: rgb(99,102,241,0.8);
+    border-radius: 100px;
+    color: #fff;
+    text-align: center;
+    /* line-height: 45px; */
+    cursor: pointer;
+    border: none;
+    z-index: 9999;
+    outline: none;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.searchContainer {
+    position: relative;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+#searchInput {
+    padding: 10px 40px 10px 15px;
+    width: 300px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+}
+
+#searchButton {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #4CAF50;
+}
+
+#searchResults {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    #openSearchModal {
+        /* position: fixed; */
+        bottom: 20px;
+    }
+    .modal-content {
+        width: 80%;
+        margin: 10% auto;
+    }
+
+    #searchInput {
+        width: calc(100% - 80px);
+    }
+
+    #searchButton {
+        padding: 10px 15px;
+    }
+/* 
+    .grid-item {
+        width: calc(50% - 10px);
+    } */
+}
+
   
