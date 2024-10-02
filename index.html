@@ -11,125 +11,7 @@
     <link rel="shortcut icon" href="static/favicon.ico" type="image/x-icon">
     <title>ACGN导航 - 二次元高质量网站、软件分享与收集</title>
     <link href="static/css/page.css" rel="stylesheet" type="text/css">
-    <style>
-#openSearchModal {
-    position: fixed;
-    bottom: 20px;
-    right: 30px;
-    width: 45px;
-    height:45px;
-    background-color: rgb(99,102,241,0.8);
-    border-radius: 100px;
-    color: #fff;
-    text-align: center;
-    /* line-height: 45px; */
-    cursor: pointer;
-    border: none;
-    z-index: 9999;
-}
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-}
-
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 10% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 90%;
-    max-width: 600px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    text-align: center;
-}
-
-h2 {
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.searchContainer {
-    position: relative;
-    margin-bottom: 20px;
-    display: inline-block;
-}
-
-#searchInput {
-    padding: 10px 40px 10px 15px;
-    width: 300px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 25px;
-}
-
-#searchButton {
-    position: absolute;
-    right: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
-    color: #4CAF50;
-}
-
-#searchResults {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-}
-
-@media screen and (max-width: 768px) {
-    #openSearchModal {
-        /* position: fixed; */
-        bottom: 20px;
-    }
-    .modal-content {
-        width: 80%;
-        margin: 10% auto;
-    }
-
-    #searchInput {
-        width: calc(100% - 80px);
-    }
-
-    #searchButton {
-        padding: 10px 15px;
-    }
-/* 
-    .grid-item {
-        width: calc(50% - 10px);
-    } */
-}
-
-    </style>
 </head>
 	
 <body>
@@ -186,7 +68,6 @@ h2 {
 
     <!-- Right content container -->
     <div id="right-container">
-        <!-- Main content sections go here -->
 	    <section id="section0">
             <h3>热门推荐</h3>
             <div class="grid-container">
@@ -198,6 +79,8 @@ h2 {
                         <div class="text-content">樱花动漫</div>
                     </div>
                 </a>
+                <div class="tooltip" style="display: none;"></div>
+           
                 <a href="https://fuyewo.com/" class="grid-item"  title="哔咔漫画"  target="_blank">
                     <div class="content">
                         <div class="" style="padding-right: 10px;">
@@ -249,6 +132,7 @@ h2 {
                     </div>
                 </a>
 
+                <div class="tooltip" style="display: none;"></div>
                 <a href="https://anime.girigirilove.com" class="grid-item" data-category="推荐"  title="资源搬字幕组的，300M+大小，有简繁双线路，无国产，推荐"   target="_blank">
                     <div class="content">
                         <div class="square-bg">G</div>
@@ -631,7 +515,8 @@ h2 {
                             <div class="content">
                                 <div class="square-bg">T</div>
                                 <div class="text-content">Touchgal</div>
-                            </div>
+                                                        </div>
+                            <img class="tooltip-btn" src="static/gray-down.png"></img>
                         </a>    
                         <a href="https://www.ttloli.com" class="grid-item"  title="老牌GAL站，不知道还能活多久"   target="_blank">
                             <div class="content">
@@ -1037,6 +922,7 @@ h2 {
                         <div class="square-bg"></div>
                         <div class="text-content">Bangumi Research</div>
                     </div>
+                    <button class="tooltip-btn"></button>
                 </a>		    
 		<a href="https://hzj.wiki/" class="grid-item"  title="B站番剧删减记录"   target="_blank">
                     <div class="content">
@@ -1263,6 +1149,7 @@ h2 {
                                 <div class="square-bg">1</div>
                                 <div class="text-content">1.1.1.1-免费VPN代理</div>
                             </div>
+                       
                         </a>    
                         <a href="https://miru.js.org/download/" class="grid-item"  title="免费、开源的 支持视频、漫画、小说扩展源的多功能媒体娱乐应用"   target="_blank">
                             <div class="content">
@@ -1307,7 +1194,7 @@ h2 {
                 <button class="filter-btn" data-category="小说">小说</button>
             </div>
             <div class="grid-container">
-                <a href="https://ylyl.me/" class="grid-item" data-category="追番"  title="广告相对而言比较少，支持下载，安卓ios都有"   target="_blank">
+                <a href="https://ylyl.me/" class="grid-item" data-category="追番"  title="广告相对而言比较少，追番支持下载，安卓ios都有"   target="_blank">
                             <div class="content">
                                 <div class="square-bg">鸭</div>
                                 <div class="text-content">鸭梨鸭梨</div>
@@ -1326,22 +1213,22 @@ h2 {
                             </div>
                         </a>
                            
-                <a href="https://jmcomicgo.me/" class="grid-item" data-category="本子"  title="未成年勿入，需要开代理"   target="_blank">
+                <a href="https://jmcomicgo.me/" class="grid-item" data-category="本子"  title="未成年勿入，本子，需要开代理"   target="_blank">
                             <div class="content">
                                 <div class="square-bg">禁</div>
                                 <div class="text-content">禁漫天堂</div>
                             </div>
                         </a> 
-                <a href="https://github.com/xiaojieonly/Ehviewer_CN_SXJ" class="grid-item" data-category="本子"  title="未成年勿入，可能要开代理"   target="_blank">
+                <a href="https://github.com/xiaojieonly/Ehviewer_CN_SXJ" class="grid-item" data-category="本子"  title="未成年勿入，本子，可能要开代理"   target="_blank">
                             <div class="content">
                                 <div class="square-bg">E</div>
                                 <div class="text-content">E站-Ehviewer</div>
                             </div>
                  </a>                           
-                <a href="https://www.picacomic.com/" class="grid-item" data-category="本子"  title="未成年勿入，需要开代理"   target="_blank">
+                <a href="https://www.picacomic.com/" class="grid-item" data-category="本子"  title="未成年勿入，本子，官网需要开代理"   target="_blank">
                             <div class="content">
-                                <div class="square-bg">嗶</div>
-                                <div class="text-content">嗶咔漫畫</div>
+                                <div class="square-bg">哔</div>
+                                <div class="text-content">哔咔漫画</div>
                             </div>
                         </a>
                 <a href="https://ivonblog.com/posts/tachiyomi-manga-reader/#21-%E5%AE%98%E6%96%B9%E7%89%88tachiyomi" class="grid-item" data-category="漫画"  title="挂梯子进去，多源漫画，漫画扩展在上面分类(更多),中文用拼音搜"   target="_blank">
@@ -1387,14 +1274,13 @@ h2 {
         </section>      
     </div>
 
-<!-- 工具提示的占位元素 -->
-<div class="tooltip" id="tooltip"></div>
-
-    
+    <!-- 工具提示的占位元素
+    <div class="tooltip" id="tooltip"></div>    -->
 
 
 </div>
 
+<!--  搜索按钮  -->
 <button id="openSearchModal">🔍</button>
 <!--  模态框  -->
     <div id="searchModal" class="modal">
@@ -1411,73 +1297,30 @@ h2 {
             </div>
         </div>
     </div>
+
+
     <script type="text/javascript"  src="static/js/tooltip.js"></script>
     <script type="text/javascript"  src="static/js/scroll.js"></script>
     <script type="text/javascript"  src="static/js/search.js"></script>
     <script type="text/javascript"  src="static/js/squrebg.js"></script>
     <script type="text/javascript"  src="static/js/tagFilter.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-        const openSearchModal = document.getElementById('openSearchModal');
-        const searchModal = document.getElementById('searchModal');
-        const closeBtn = searchModal.querySelector('.close');
-        const searchInput = document.getElementById('searchInput');
-        const searchButton = document.getElementById('searchButton');
-        const searchResults = document.getElementById('searchResults');
-        const allLinks = document.querySelectorAll('a.grid-item');
-    
-        // 打开模态框
-        openSearchModal.onclick = function() {
-            searchModal.style.display = "block";
-        }
-    
-        // 关闭模态框
-        closeBtn.onclick = function() {
-            searchModal.style.display = "none";
-        }
-    
-        // 点击模态框外部关闭
-        window.onclick = function(event) {
-            if (event.target == searchModal) {
-                searchModal.style.display = "none";
-            }
-        }
-    
-        function performSearch() {
-        const searchTerm = searchInput.value.toLowerCase().trim();
-        searchResults.innerHTML = ''; // 清空之前的搜索结果
-    
-        if (searchTerm === '') {
-            searchResults.innerHTML = '<p>请输入搜索关键词。</p>';
-            return;
-        }
-    
-        let hasResults = false;
-    
-        allLinks.forEach(link => {
-            const title = link.getAttribute('title').toLowerCase();
-            const text = link.querySelector('.text-content').textContent.toLowerCase();
-    
-            if (title.includes(searchTerm) || text.includes(searchTerm)) {
-                const clonedLink = link.cloneNode(true);
-                clonedLink.classList.add('grid-item'); // 确保添加了grid-item类
-                searchResults.appendChild(clonedLink);
-                hasResults = true;
-            }
-        });
-    
-        if (!hasResults) {
-            searchResults.innerHTML = '<p>没有找到匹配的结果。</p>';
-        }
-    }
-    
-        searchButton.addEventListener('click', performSearch);
-        searchInput.addEventListener('keyup', function(event) {
-            if (event.key === 'Enter') {
-                performSearch();
-            }
-        });
+    <script type="text/javascript"  src="static/js/findLink.js"></script>
+    <!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+ 
+    ym(98495828, "init", {
+         clickmap:true,
+         trackLinks:true,
+         accurateTrackBounce:true,
+         webvisor:true
     });
-        </script>
+ </script>
+ <noscript><div><img src="https://mc.yandex.ru/watch/98495828" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+ <!-- /Yandex.Metrika counter -->
 </body>
 </html>
