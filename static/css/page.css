@@ -28,6 +28,37 @@ h3 {
     font-weight: 700;
     border-left: 4px solid #12a3f5;    
     }
+    .icons{
+        width: 30px;
+        height: 30px;
+        /* color: white;
+        background-color: rgba(195, 187, 196, 0.5); */
+        border-radius: 10px;
+        /* margin-right: 10px; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-right: 10px;
+        /* background-color: whitesmoke; */
+    }
+    .icons img{
+        border-radius: 50%; 
+        height:30px;
+    }
+    .icons-other{
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-right: 10px;
+        padding-right: 10px;
+        /* background-color: whitesmoke; */
+    }
+    .icons-other img{
+        border-radius: 50%; 
+        height:35px;
+    }
 
     /* 标签筛选按钮  */
     .filter-buttons {
@@ -93,7 +124,7 @@ header {
 .search-container {
     display: flex;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 15px;
     overflow: hidden;
     background-color: white;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -106,7 +137,7 @@ header {
     padding: 8px;
     border-radius: 10px 0 0 10px;
     flex-shrink: 0;
-    background-color: #f8f8f8;
+    background-color: white;
     width: auto; /* 自适应内容宽度 */
 }
 
@@ -148,15 +179,16 @@ button {
       }
     #header-content {
         width: 90%;
+	max-width: 95%;
     }
-    #search-form{
-        /* width: 90%; */
+    #search-input{
+         width: 95%; 
     }
     .search-container { 
         max-width:99%;
      }
     #search-engine {
-        max-width: 25%;
+        max-width: 35%;
     }
 
     #search-input {
@@ -282,7 +314,7 @@ section {
         z-index: 1000;
         width: 95%;
         max-width: 300px;
-        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 2px 2px rgba(0, 0.1, 0.1, 0.2);
         margin-top: 20px; /* 调整margin-top确保与尖角分开 */
         left: 50%;
         transform: translateX(-50%);
@@ -310,7 +342,7 @@ section {
         border-style: solid;
         border-color: transparent transparent transparent; /* 边框颜色 */
     }
-    /* 使图标按钮样式适合设计 */
+    /* 展开图标 */
     .tooltip-btn {
         display: none;
         position: absolute;
@@ -318,14 +350,14 @@ section {
         right: 10px;
         transform: translateY(-50%);
         width: 35px;
-        height: 30px;
+        height: 32px;
         line-height: 25px;
         border-radius: 50%;
-        color: #007bff;;
         border: none;
         cursor: pointer;
         font-size: 12px;
         text-align: center;
+        opacity: 0.6;
         transition: background-color 0.3s ease;
     }
     
@@ -341,7 +373,8 @@ section {
 @media (max-width: 768px) {
     .tooltip-btn{display: block;}
     .tooltip {
-       display: flex;
+       width: 90%;    
+       display: flex;	    
        justify-content: center;
        align-items: center;
      }
@@ -595,10 +628,6 @@ h2 {
     #searchButton {
         padding: 10px 15px;
     }
-/* 
-    .grid-item {
-        width: calc(50% - 10px);
-    } */
 }
 
   
