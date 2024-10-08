@@ -26,70 +26,64 @@
 //         });
 
 document.addEventListener("DOMContentLoaded", function () {
-    // 获取所有 .icons 类的元素
-    var iconElements = document.querySelectorAll(".icons");
-
-    iconElements.forEach(function (iconElement) {
-        // 获取父级 .grid-item 元素
-        var gridItem = iconElement.closest('.grid-item');
-        
-        if (gridItem) {
-            // 获取 href 属性
-            var href = gridItem.getAttribute('href');
-            
-            if (href) {
-                // 提取域名
-                var domain = extractDomain(href);
-                
-                // 创建 img 元素
-                var img = document.createElement('img');
-                img.src = "https://favicon.im/" + domain +'?larger=true';
-                
-                // 获取兄弟元素 .text-content 的文本内容作为 alt
-                var textContent = gridItem.querySelector('.text-content');
-                if (textContent) {
-                    img.alt = textContent.textContent.trim();
-                } else {
-                    img.alt = domain;
+    // 创建 Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const iconElement = entry.target;
+                const gridItem = iconElement.closest('.grid-item');
+                if (gridItem) {
+                    const href = gridItem.getAttribute('href');
+                    if (href) {
+                        const img = document.createElement('img');
+                        img.src = getFaviconURL(href);
+                        // 获取兄弟元素.text-content 的文本内容作为 alt
+                        const textContent = gridItem.querySelector('.text-content');
+                        if (textContent) {
+                            img.alt = textContent.textContent.trim();
+                        } else {
+                            img.alt = extractDomain(href);
+                        }
+                        // 清空.icons 元素的内容，然后插入 img
+                        iconElement.innerHTML = '';
+                        iconElement.appendChild(img);
+                    }
+                    // 加载完后停止观察该元素
+                    observer.unobserve(iconElement);
                 }
-                
-                // 清空 .icons 元素的内容，然后插入 img
-                iconElement.innerHTML = '';
-                iconElement.appendChild(img);
             }
-        }
-    });
+        });
+    }, { rootMargin: "0px 0px 50px 0px" });
+
+    // 获取所有.icons 类的元素并开始观察
+    const iconElements = document.querySelectorAll(".icons");
+    iconElements.forEach(iconElement => observer.observe(iconElement));
 });
 
-// 修改后的辅助函数：从 URL 中提取域名，使用白名单保留特定二级域名
-function extractDomain(url) {
-    // 定义需要保留的二级域名白名单
-    const whitelist = ['www', 'nav','yyzs','m'];
+// 生成 favicon 的 URL
+function getFaviconURL(url) {
+    const domain = extractDomain(url);
+    return `https://favicon.im/${domain}?larger=true`;
+}
 
+// 从 URL 中提取域名，使用白名单保留特定二级域名
+function extractDomain(url) {
+    const whitelist = ['www', 'nav'];
     var domain;
-    // 移除协议
     if (url.indexOf("://") > -1) {
         domain = url.split('/')[2];
     } else {
         domain = url.split('/')[0];
     }
-
-    // 分割域名部分
     var parts = domain.split('.');
-
-    // 如果有三个或更多部分，检查是否需要保留二级域名
     if (parts.length >= 3) {
         var subdomain = parts[0];
         if (whitelist.includes(subdomain)) {
-            // 如果二级域名在白名单中，保留它
             return parts.slice(-3).join('.');
         } else {
-            // 否则，只返回最后两个部分
             return parts.slice(-2).join('.');
         }
-    }
-    // 如果只有两个部分或更少，返回整个域名
-    else {
+    } else {
         return domain;
     }
 }
