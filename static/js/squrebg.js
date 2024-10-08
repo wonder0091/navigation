@@ -78,7 +78,7 @@
         // 生成 favicon 的 URL
         function getFaviconURL(url) {
             const domain = extractDomain(url);
-            return `https://favicon.im/${domain}?larger=true`;
+            return `https://favicon.im/${domain}`;
         }
 
         // 从 URL 中提取域名，使用白名单保留特定二级域名
