@@ -68,7 +68,7 @@ function getFaviconURL(url) {
 
 // 从 URL 中提取域名，使用白名单保留特定二级域名
 function extractDomain(url) {
-    const whitelist = ['www', 'nav'];
+    const whitelist = ['www', 'nav','m'];
     var domain;
     if (url.indexOf("://") > -1) {
         domain = url.split('/')[2];
