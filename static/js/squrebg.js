@@ -83,30 +83,62 @@ document.addEventListener("DOMContentLoaded", function () {
     iconElements.forEach(iconElement => observer.observe(iconElement));
 });
 
+
+/// 域名黑名单
+const domainBlacklist = ['www.picacomic.com', 'mobile.example.com', 'wap.example.com'];
+
 // 生成 favicon 的 URL
 function getFaviconURL(url) {
     const domain = extractDomain(url);
-    return `https://www.faviconextractor.com/favicon/${domain}?larger=true`;
+
+    if (domainBlacklist.includes(domain)) {
+        return `https://favicon.im/${domain}`;
+    } else {
+        return `https://www.faviconextractor.com/favicon/${domain}?larger=true`;
+    }
 }
 
-// 从 URL 中提取域名，使用白名单保留特定二级域名
+// 从 URL 中提取域名
 function extractDomain(url) {
-    const whitelist = ['www', 'nav','m'];
-    var domain;
+    let domain;
+    // 移除协议
     if (url.indexOf("://") > -1) {
         domain = url.split('/')[2];
     } else {
         domain = url.split('/')[0];
     }
-    var parts = domain.split('.');
-    if (parts.length >3) {
-        var subdomain = parts[0];
-        if (whitelist.includes(subdomain)) {
-            return parts.slice(-3).join('.');
-        } else {
-            return parts.slice(-2).join('.');
-        }
-    } else {
+    
+    // 移除端口号（如果存在）
+    domain = domain.split(':')[0];
+    
+    // 处理 IP 地址
+    if (/^(\d{1,3}\.){3}\d{1,3}$/.test(domain)) {
         return domain;
     }
+    
+    // 分割域名部分
+    const parts = domain.split('.');
+    
+    // 如果只有两部分（如 example.com），直接返回
+    if (parts.length <= 2) {
+        return domain;
+    }
+    
+    // 处理 www 子域名
+    if (parts[0] === 'www') {
+        return domain;
+    }
+    
+    // 处理更复杂的域名结构
+    const tld = parts[parts.length - 1];
+    const sld = parts[parts.length - 2];
+    
+    // 检查是否为已知的复合 TLD（如 .co.uk）
+    const knownTlds = ['co.uk', 'com.au', 'co.jp']; // 可以根据需要扩展这个列表
+    if (knownTlds.includes(`${sld}.${tld}`)) {
+        return parts.slice(-3).join('.');
+    }
+    
+    // 对于其他情况，返回完整域名
+    return domain;
 }
