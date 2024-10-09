@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         // 获取兄弟元素.text-content 的文本内容作为 alt
                         const textContent = gridItem.querySelector('.text-content');
                         if (textContent) {
-                            img.alt = textContent.textContent.trim();
+                            img.alt = textContent.textContent.trim()[0];
                         } else {
                             img.alt = extractDomain(href);
                         }
@@ -85,7 +85,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 /// 域名黑名单
-const domainBlacklist = ['www.picacomic.com', 'mobile.example.com', 'wap.example.com'];
+const domainBlacklist = [
+    'www.picacomic.com', 'bangumi.moe', 
+    'www.tsdm39.com/forum.php','www.mh160.cc',
+    'nicohub.cc/index','as2.bitinn.net',
+    'miru.js.org'
+];
 
 // 生成 favicon 的 URL
 function getFaviconURL(url) {
