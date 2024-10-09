@@ -119,42 +119,42 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (gridItem) {
                     const href = gridItem.getAttribute('href');
                     if (href) {
-                        const img = document.createElement('img');
                         const domain = extractDomain(href);
                         const cacheKey = 'favicon_' + domain;
                         const cachedSrc = localStorage.getItem(cacheKey);
-                        if (cachedSrc) {
-                            img.src = cachedSrc;
-                        } else {
-                            img.src = getFaviconURL(href);
-                            // 当图标加载完成后，将其存入缓存
-                            img.onload = () => {
-                                try {
-                                    localStorage.setItem(cacheKey, img.src);
-                                } catch (e) {
-                                    console.error('localStorage is full');
-                                }
-                            };
-                            // 如果加载错误且状态码为 404，设置为默认图标
-                            img.onerror = (error) => {
-                                if (error && error.target && error.target.src && error.target.src.includes('404')) {
-                                    img.src = 'static/default.ico';
-                                }
-                            };
+                        // 获取图标元素内的 img 标签
+                        const img = iconElement.querySelector('img');
+                        if (img) {
+                            if (cachedSrc) {
+                                img.src = cachedSrc;
+                            } else {
+                                img.src = getFaviconURL(href);
+                                // 当图标加载完成后，将其存入缓存
+                                img.onload = () => {
+                                    try {
+                                        localStorage.setItem(cacheKey, img.src);
+                                    } catch (e) {
+                                        console.error('localStorage is full');
+                                    }
+                                };
+                                // 如果加载错误且状态码为 404，设置为默认图标
+                                img.onerror = (error) => {
+                                    if (error && error.target && error.target.src && error.target.src.includes('404')) {
+                                        img.src = 'static/default.ico';
+                                    }
+                                };
+                            }
+                            // 获取兄弟元素.text-content 的文本内容作为 alt
+                            const textContent = gridItem.querySelector('.text-content');
+                            if (textContent) {
+                                img.alt = textContent.textContent.trim()[0];
+                            } else {
+                                img.alt = domain;
+                            }
                         }
-                        // 获取兄弟元素.text-content 的文本内容作为 alt
-                        const textContent = gridItem.querySelector('.text-content');
-                        if (textContent) {
-                            img.alt = textContent.textContent.trim()[0];
-                        } else {
-                            img.alt = extractDomain(href);
-                        }
-                        // 清空.icons 元素的内容，然后插入 img
-                        iconElement.innerHTML = '';
-                        iconElement.appendChild(img);
+                        // 加载完后停止观察该元素
+                        observer.unobserve(iconElement);
                     }
-                    // 加载完后停止观察该元素
-                    observer.unobserve(iconElement);
                 }
             }
         });
@@ -164,7 +164,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const iconElements = document.querySelectorAll(".icons");
     iconElements.forEach(iconElement => observer.observe(iconElement));
 });
-
 
 /// 域名黑名单
 const domainBlacklist = [
@@ -180,9 +179,9 @@ function getFaviconURL(url) {
     const domain = extractDomain(url);
 
     if (domainBlacklist.includes(domain)) {
-        return `https://favicon.im/${domain}`;
+        return `https://favicon.im/${domain}`; 
     } else {
-        return `https://www.faviconextractor.com/favicon/${domain}?larger=true`;
+        return `https://www.faviconextractor.com/favicon/${domain}?larger=true`; 
     }
 }
 
