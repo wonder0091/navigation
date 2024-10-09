@@ -26,7 +26,6 @@
 //         });
 
 //3
-
 document.addEventListener("DOMContentLoaded", function () {
     // 创建 Intersection Observer
     const observer = new IntersectionObserver((entries) => {
@@ -87,9 +86,10 @@ document.addEventListener("DOMContentLoaded", function () {
 /// 域名黑名单
 const domainBlacklist = [
     'www.picacomic.com', 'bangumi.moe', 
-    'www.tsdm39.com/forum.php','www.mh160.cc',
-    'nicohub.cc/index','as2.bitinn.net',
-    'miru.js.org'
+    'www.tsdm39.com','www.mh160.cc',
+    'nicohub.cc','as2.bitinn.net',
+    'miru.js.org','pan666.net',
+    'm.avicone.com','www.mansou.co'
 ];
 
 // 生成 favicon 的 URL
