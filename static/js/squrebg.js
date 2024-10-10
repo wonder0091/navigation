@@ -171,7 +171,8 @@ const domainBlacklist = [
     'www.tsdm39.com','www.mh160.cc',
     'nicohub.cc','as2.bitinn.net',
     'miru.js.org','pan666.net',
-    'm.avicone.com','www.mansou.co'
+    'm.avicone.com','www.mansou.co',
+    'www.galzy.eu.org'
 ];
 
 // 生成 favicon 的 URL
