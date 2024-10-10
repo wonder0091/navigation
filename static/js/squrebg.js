@@ -113,7 +113,7 @@ const domainBlacklist = [
     'tsdm39.com',
     'nicohub.cc',
     'avicone.com', 
-    'galzy.eu.org'
+    'galzy.eu.org'  // 保持完整的域名
 ];
 
 // 生成 favicon 的 URL
@@ -144,7 +144,7 @@ function extractDomain(url) {
     return domain;
 }
 
-// 获取根域名（去除 www 和子域名）
+// 获取根域名（去除 www 和处理特殊情况）
 function getRootDomain(domain) {
     const parts = domain.split('.');
     
@@ -158,10 +158,11 @@ function getRootDomain(domain) {
         return parts.join('.');
     }
     
-    // 处理更复杂的域名结构
-    const knownTlds = ['eu.org','co.uk', 'com.au', 'co.jp']; // 可以根据需要扩展这个列表
-    if (knownTlds.includes(`${parts[parts.length - 2]}.${parts[parts.length - 1]}`)) {
-        return parts.slice(-3).join('.');
+    // 处理特殊情况
+    const specialDomains = ['eu.org', 'co.uk', 'com.au', 'co.jp']; 
+    const lastTwoParts = parts.slice(-2).join('.');
+    if (specialDomains.includes(lastTwoParts)) {
+        return parts.join('.');
     }
     
     // 对于其他情况，返回最后两部分
