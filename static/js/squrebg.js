@@ -113,7 +113,7 @@ const domainBlacklist = [
     'tsdm39.com',
     'nicohub.cc',
     'avicone.com', 
-    'eu.org'
+    'galzy.eu.org'
 ];
 
 // 生成 favicon 的 URL
@@ -159,7 +159,7 @@ function getRootDomain(domain) {
     }
     
     // 处理更复杂的域名结构
-    const knownTlds = ['co.uk', 'com.au', 'co.jp']; // 可以根据需要扩展这个列表
+    const knownTlds = ['eu.org','co.uk', 'com.au', 'co.jp']; // 可以根据需要扩展这个列表
     if (knownTlds.includes(`${parts[parts.length - 2]}.${parts[parts.length - 1]}`)) {
         return parts.slice(-3).join('.');
     }
