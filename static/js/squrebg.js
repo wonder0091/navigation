@@ -110,10 +110,10 @@ document.addEventListener("DOMContentLoaded", function () {
 //3
 // 域名黑名单
 const domainBlacklist = [    
-    'www.tsdm39.com',
+    'tsdm39.com',
     'nicohub.cc',
     'm.avicone.com', 
-    'www.galzy.eu.org'
+    'galzy.eu.org'
 ];
 
 
@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         const cachedSrc = localStorage.getItem(cacheKey);
                         // 获取图标元素内的 img 标签
                         const img = iconElement.querySelector('img');
-                        if (img && !img.classList.contains('tooltip-btn')) {
+                        if (img) {
                             if (cachedSrc) {
                                 img.src = cachedSrc;
                             } else {
