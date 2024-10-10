@@ -112,19 +112,10 @@ document.addEventListener("DOMContentLoaded", function () {
 const domainBlacklist = [    
     'www.tsdm39.com',
     'nicohub.cc',
-    'as2.bitinn.net', 
     'm.avicone.com', 
     'www.galzy.eu.org'
 ];
 
-// 例外名单
-const exceptionList = [
-    'www.mansou.co',
-    'www.picacomic.com',
-    'pan666.net',
-    'www.mh160.cc',
-    'bangumi.moe'
-];
 
 document.addEventListener("DOMContentLoaded", function () {
     // 创建 Intersection Observer
@@ -137,14 +128,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     const href = gridItem.getAttribute('href');
                     if (href) {
                         const domain = extractDomain(href);
-                        
-                        // 检查是否在例外名单中
-                        if (exceptionList.includes(domain)) {
-                            // 将 .icons 类修改为 .square-bg 类
-                            iconElement.classList.remove('icons');
-                            iconElement.classList.add('square-bg');
-                        }
-                        
                         const cacheKey = 'favicon_' + domain;
                         const cachedSrc = localStorage.getItem(cacheKey);
                         // 获取图标元素内的 img 标签
