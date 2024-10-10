@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         const cachedSrc = localStorage.getItem(cacheKey);
                         // 获取图标元素内的 img 标签
                         const img = iconElement.querySelector('img');
-                        if (img) {
+                        if (img && !img.classList.contains('tooltip-btn')) {
                             if (cachedSrc) {
                                 img.src = cachedSrc;
                             } else {
