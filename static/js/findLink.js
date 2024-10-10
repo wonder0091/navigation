@@ -53,7 +53,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 hasResults = true;
 
                 // 提前加载图标
-                const img = clonedLink.querySelector('img');
+                const iconsDiv = clonedLink.querySelector('.icons');
+                const img = iconsDiv && iconsDiv.querySelector('img');
                 if (img && !img.classList.contains('tooltip-btn') && !img.classList.contains('icons-other')) {
                     const href = link.getAttribute('href');
                     img.src = getFaviconURL(href); // 使用自定义函数获取 favicon
