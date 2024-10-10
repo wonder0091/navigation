@@ -113,7 +113,7 @@ const domainBlacklist = [
     'tsdm39.com',
     'nicohub.cc',
     'avicone.com', 
-    'galzy.eu.org'
+    'eu.org'
 ];
 
 // 生成 favicon 的 URL
