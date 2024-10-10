@@ -54,12 +54,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // 提前加载图标
                 const img = clonedLink.querySelector('img');
-                if (img) {
+                if (img && !img.classList.contains('tooltip-btn')) {
                     const href = link.getAttribute('href');
                     img.src = getFaviconURL(href); // 使用自定义函数获取 favicon
-
-                    // 如果需要，可以通过 IntersectionObserver 进行懒加载管理
-                    // observer.observe(clonedLink.querySelector('.icons')); (如果存在)
                 }
             }
         });
