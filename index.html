@@ -2,1297 +2,293 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name='keywords' content='ACGN导航网,二次元导航,动漫网站,资源网站'>
-    <meta name='description' content='ACGN导航,搜集网络各种动画、漫画、小说、GALGAME等网站,分享各种ACGN的资源软件...'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="msvalidate.01" content="8D0298066D31E13BCCA3369FDB187079"/>
-    <meta name="yandex-verification" content="770b3b3308c45bf0" />   	
-    <meta name="google-site-verification" content="ZCPT5ebSCuqqXK8mfqni-CLZxgbPrZKON3cwG_bw_j4" />	
-    <link rel="shortcut icon" href="static/favicon.ico" type="image/x-icon">
-    <title>ACGN导航 - 二次元高质量网站、软件分享与收集</title>
-    <link href="static/css/page.css" rel="stylesheet" type="text/css">
+    <title>随机图片API合集</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: #f4f4f4;
+        }
+
+/* 布局容器 */
+#container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    gap: 20px; /* 添加间距 */
+}
+
+/* 左侧大图区域 */
+#image-container {
+    flex: 0 0 70%; /* 左侧占70% */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* 改为顶部对齐 */
+    padding: 10px;
+    border-right: 2px solid #ddd;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+img {
+    max-width: 100%;
+    max-height: calc(100vh - 100px); /* Prevent image overflow */
+    display: block;
+    border-radius: 5px;
+    position: relative;
+    top: -5px; 
+}
+
+/* 右侧API组区域 */
+#api-group-container {
+    flex: 0 0 30%; /* 右侧占30% */
+    display: grid; /* 改为双列布局 */
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 10px;
+    overflow-y: auto; /* 允许纵向滚动 */
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.api-group {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s;
+    cursor: pointer; /* Make the whole group clickable */
+}
+
+.api-group:hover {
+    background-color: #f1f1f1; /* Hover效果 */
+}
+
+h2, h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+a {
+    display: block;
+    margin-bottom: 5px;
+    text-decoration: none;
+    color: #337ab7;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* 移动端样式 */
+@media (max-width: 768px) {
+    #container {
+        flex-direction: column; /* 改为竖向布局 */
+    }
+
+    /* 调整API组容器在移动端的样式 */
+    #api-group-container {
+        flex: 1 1 100%;
+        margin-top: 20px;
+        border-right: none; /* 移除右边的分隔线 */
+        grid-template-columns: 1fr 1fr; /* 依然保持双列布局 */
+    }
+
+    /* 缩小每个API组的边距 */
+    .api-group {
+       width:90%;
+       height:90%;
+        padding: 5px;
+    }
+
+    /* 确保图片居中显示 */
+    #image-container {
+        padding-bottom: 10px;
+    }
+
+    /* 调整图片位置 */
+    img {
+        max-height: calc(100vh - 150px); /* 留出额外的空间，避免在小屏幕上溢出 */
+        top: 0; /* 在移动端不需要向上偏移 */
+    }
+}
+
+    </style>
 </head>
-	
 <body>
-    <header>
-        <h1 id="hd">ACGN导航</h1>	    
-        <div id="header-content">
-            <form id="search-form">
-                <div class="search-container">
-                    <select id="search-engine">
-                        <option value="https://soupian.pro/search?key=%s">搜片</option>
-                        <option value="https://www.mangacopy.com/search?q=%s&q_type=">搜日漫</option>
-                        <option value="https://mikanime.tv/Home/Search?searchstr=%s">搜动画</option>
-                        <option value="https://www.gying.net/s/1---1/%s">搜电影</option>
-                        <option value="https://www.yxzhi.com/?post_type=post&s=%s">搜APP</option>
-                        <option value="https://www.maoliyun.com/search?k=%s&s=0&t=-1">搜网盘</option>
-                        <option value="https://www.soman.com/search.html?keyword=%s">搜漫画</option>    
-                        <option value="https://hanime1.me/search?query=%s&type=&genre=&sort=&year=&month=">搜里番</option>
-                        <option value="https://nhentai.net/search/?q=%s">搜本子</option>
-                        <option value="https://limbopro.com/btsearch.html#gsc.tab=0&gsc.sort=&gsc.ref=more%3Amissav&gsc.q=%s">搜番号</option>       
-                    </select>
-                    <input type="search" id="search-input" placeholder=" 请选择分类再搜索...">
-                    <button style="background:none;" onclick="performSearch()">🔍</button>
-                </div>
-            </form>
 
- <div id="tg">
-    <a href="https://link3.cc/yiyun" target="_bank" title="其它">
-	    <img src="data:image/x-icon;base64,AAABAAMAMDAAAAEAIACoJQAANgAAACAgAAABACAAqBAAAN4lAAAQEAAAAQAgAGgEAACGNgAAKAAAADAAAABgAAAAAQAgAAAAAAAAJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADaniIN2Z4iNtmeIm/ZniKk2Z4izdmeIufZniL32Z4i/tmeIv7ZniL32Z4i59meIs3ZniKk2Z4ib9meIjbaniMNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADanyMD2p4jKNqeInPaniK92p4i6tqeIvzaniL/2p4i/9qeIv/aniL/2p4i/9qeIv/aniL/2p4i/9qeIv/aniL/2p4i/NqeIuraniK92p4ic9qeIyjanyMDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA258jAtqfIy3anyOR2p8j4tqeI/7aniP/2p8j/9qeI//aniP/2p8j/9qeI//aniP/2p8j/9qeI//aniP/2p8j/9qeI//aniP/2p8j/9qeI//aniP/2p8j/tqfI+LanyOR2p8jLdufIwIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADbnyMW258jfdufI+PanyP/2p8j/9qfI//anyP/2p8j/9qfI//anyP/2p8j/9qfI//anyP/2p8j/9qfI//anyP/2p8j/9qfI//anyP/2p8j/9qfI//anyP/2p8j/9qfI//anyP/258j49ufI33bnyMWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANufIzrbnyO/258j/dufI//bnyP/258j/9ufI//bnyP/258j/9ufI//bnyP/258j/9ufI//bnyP/258j/9ufI//bnyP/258j/9ufI//bnyP/258j/9ufI//bnyP/258j/9ufI//bnyP/258j/9ufI/3bnyO/258jOgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADcoCQE3KAjXdufI+PbnyP/258j/9ufI//bnyP/258j/9ufI//bnyP/258j/9ufI//bnyP/258j/9ufI//bnyP/258j/9ufI//bnyP/258j/9ufI//bnyP/258j/9ufI//bnyP/258j/9ufI//bnyP/258j/9ufI//bnyP/258j49ygI13coCMEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANygJAXcoCNx3KAj8dygI//coCP/3KAj/9ygI//coCP/3KAj/9ygI//coCP/3KAj/9ygI//coCP/3KAj/9ygI//coCP/3KAj/9ygI//coCP/3KAj/9ygI//coCP/3KAj/9ygI//coCP/3KAj/9ygI//coCP/3KAj/9ygI//coCP/3KAj/9ygI/HcoCNx3KAkBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA3aEkA9ygI3HcoCP03KAj/9ygI//coCP/3KAj/9ygI//coCP/3KAj/9ygI//coCP/3KAj/9ygI//coCP/3KAj/9ygI//coCP/3KAj/9ygI//coCP/3KAj/9ygI//coCP/3KAj/9ygI//coCP/3KAj/9ygI//coCP/3KAj/9ygI//coCP/3KAj/9ygI//coCP03KAkcd2hJAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA3aAkXd2gJPDdoCT/3aAk/92gJP/doCT/3aAk/92gJP/doCT/3aAk/92gJP/doCT/3aAk/92gJP/doCT/3aAk/92gJP/doCT/3aAk/92gJP/doCT/3aAk/92gJP/doCT/3aAk/92gJP/doCT/3aAk/92gJP/doCT/3aAk/92gJP/doCT/3aAk/92gJP/doCT/3aAk8N2gJF0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADdoSQ73aEk4t2hJP/doCT/3aAk/92hJP/doCT/3aAk/92hJP/doCT/3aAk/92hJP/doCT/3aAk/92hJP/doCT/3aAk/92hJP/doCT/3aAk/92hJP/doCT/3aAk/92hJP/doST/3aAk/92hJP/doST/3aAk/92hJP/doST/3aAk/92hJP/doST/3aAk/92hJP/doST/3aAk/92hJOLdoSQ7AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN6hJBbeoSS+3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3aAj/92gIv/doSP/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoSS+3qEkFgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN6hJH3eoST+3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoCL/4KYw/+KtQP/fpCz/3qEj/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST+3qEkfQAAAAAAAAAAAAAAAAAAAAAAAAAA36IkLt+hJOLeoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEi/9+jKP/pwW3/9+jJ//z16P/x1qD/36Qq/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEk4t+iJC4AAAAAAAAAAAAAAADgoyYB36Ikkd+iJP/foiT/36Ik/9+iJP/foiT/36Ik/9+iJP/foiT/36Ik/9+iJP/foiT/36Ik/9+iJP/foiT/36Ik/9+iJP/foiT/36Ik/9+iJP/foiT/36Ik/9+hJP/foCL/46w+//HYo//++/X////////////9+fH/5rZV/9+gIv/foiT/36Ik/9+iJP/foiT/36Ik/9+iJP/foiT/36Ik/9+iJP/foiT/36Ik/9+iJJHgoyYBAAAAAAAAAADgoiUo36Il4d+iJf/foiX/36Il/9+iJf/foiX/36Il/9+iJf/foiX/36Il/9+iJf/foiX/36Il/9+iJf/foiX/36Il/9+iJf/foiX/36Il/9+iJf/foiX/36Ej/+CjJ//pv2n/+e3V/////v//////////////////////7cmB/9+gIf/foiX/36Il/9+iJf/foiX/36Il/9+iJf/foiX/36Il/9+iJf/foiX/36Il/9+iJeHgoiUoAAAAAAAAAADgoiVz4KIl/+CiJf/goiX/4KIl/+CiJf/goiX/4KIl/+CiJf/goiX/4KIl/+CiJf/goiX/4KIl/+CiJf/goiX/4KIl/+CiJf/goiX/4KIl/+CiJP/foSL/46w8//HXoP/9+vP/////////////////////////////////8tml/+CiJP/goiX/4KIl/+CiJf/goiX/4KIl/+CiJf/goiX/4KIl/+CiJf/goiX/4KIl/+CiJf/goiVzAAAAAOGjJQ3goyW84KIl/+CiJf/goiX/4KIl/+CiJf/goiX/4KIl/+CiJf/goiX/4KIl/+CiJf/goiX/4KIl/+CiJf/goiX/4KIl/+CiJf/goyX/4KIk/+GjJ//pvmX/+OzR/////v//////////////////////////////////////9+fF/+GmLP/goiT/4KIl/+CiJf/goiX/4KIl/+CiJf/goiX/4KIl/+CiJf/goiX/4KIl/+CiJf/goyW84aMlDeGjJTfhoyXp4aMl/+GjJf/hoyX/4aMl/+GjJf/hoyX/4aMl/+GjJf/hoyX/4aMl/+GjJf/hoyX/4aMl/+GjJf/hoyX/4aMl/+GjJf/hoiT/46kz//HUmv/9+fL/////////////////////////////////////////////////+/Lf/+SsO//goiT/4aMl/+GjJf/hoyX/4aMl/+GjJf/hoyX/4aMl/+GjJf/hoyX/4aMl/+GjJf/hoyXp4aMlN+GjJW7hoyX84aMl/+GjJf/hoyX/4aMl/+GjJf/hoyX/4aMl/+GjJf/hoyX/4aMl/+GjJf/hoyX/4aMl/+GjJf/hoyX/4aMl/+GjJf/hoiP/786M/////v///////////////////////////////////////////////////////fny/+e2Uv/hoiP/4aMl/+GjJf/hoyX/4aMl/+GjJf/hoyX/4aMl/+GjJf/hoyX/4aMl/+GjJf/hoyX84aMlbuKjJaTioyX/4qMl/+KjJf/ioyX/4qMl/+KjJf/ioyX/4qMl/+KjJf/ioyX/4qMl/+GjJP/hoiL/4aIi/+GiIv/hoiL/4aMk/+KjJf/hoiP/7smA//79+/////////////////////////////////////////////////////////78/+vCbv/hoiL/4qMl/+KjJf/ioyX/4qMl/+KjJf/ioyX/4qMl/+KjJf/ioyX/4qMl/+KjJf/ioyX/4qMlpOKkJs3ipCb/4qQm/+KkJv/ipCb/4qQm/+KkJv/ipCb/4qQm/+KjJf/ioiL/4qMl/+SrN//pulr/7sqC//HSlP/sxHP/5aw4/+KjI//ioyX/46cu//LWnf/+/fv///////////////////////////////////////////////////////DPjv/ioiL/4qQm/+KkJv/ipCb/4qQm/+KkJv/ipCb/4qQm/+KkJv/ipCb/4qQm/+KkJv/ipCb/4qQmzeKkJufipCb/4qQm/+KkJv/ipCb/4qQm/+KkJv/ipCb/4qQl/+SqNP/rwGj/89mk//ru1//++/X//////////////vz/+evQ/+u/Z//jpSj/4qMj/+SnLv/y1Jn//vz5//////////////////////////////////////////////////Tdrf/jpCb/4qQm/+KkJv/ipCb/4qQm/+KkJv/ipCb/4qQm/+KkJv/ipCb/4qQm/+KkJv/ipCb/46Qm5+OkJvfjpCb/46Qm/+OkJv/jpCb/46Qm/+OkJv/jpCX/5Kcu//Xfs////vz///////////////////////////////////////368v/y1p3/5q08/+KiIv/kpiv/8dCP//779v////////////////////////////////////////////jpyv/kqC//46Ql/+OkJv/jpCb/46Qm/+OkJv/jpCb/46Qm/+OkJv/jpCb/46Qm/+OkJv/jpCb/46Qm9+OlJv3jpCb/46Qm/+OkJv/jpCb/46Qm/+OkJv/jpCb/5KYq//HQjv/99+z///////////////////////////////////////////////7/+evQ/+u+ZP/jpSf/5KUn/+/Mhf/9+vP///////////////////////////////////////vy4f/mrj3/46Ql/+OkJv/jpCb/46Qm/+OkJv/jpCb/46Qm/+OkJv/jpCb/46Qm/+OkJv/jpCb/46Qm/eSlJv7kpSb/5KUm/+SlJv/kpSb/5KUm/+SlJv/kpSb/5KUm/+SlKP/ptk//8tSY//vx3v///v3///////////////////////////////////////358f/y1Zv/5q06/+SkJP/vyHz//fnw//////////////////////////////////358f/pt1L/46Qk/+SlJv/kpSb/5KUm/+SlJv/kpSb/5KUm/+SlJv/kpSb/5KUm/+SlJv/kpSb/5KUm/uSlJvfkpSb/5KUm/+SlJv/kpSb/5KUm/+SlJv/kpSb/5KUm/+SlJv/kpCT/5KUl/+evQP/vy4H/+erM//78+P////////////////////////////////////7/+evP/+y+Y//kpij/7sV0//347f/////////////////////////////+/P/twmv/5KQj/+SlJv/kpSb/5KUm/+SlJv/kpSb/5KUm/+SlJv/kpSb/5KUm/+SlJv/kpSb/5KUm9+WlJ+flpSf/5aUn/+WlJ//lpSf/5aUn/+WlJ//lpSf/5aUn/+WlJ//lpSf/5aUn/+SlJf/kpCT/5qs0/+3Bav/24bf//fnv//////////////////////////////////358f/z1Zv/5647/+7EcP/9+O3////////////////////////////wzYf/5KQj/+WlJ//lpSf/5aUn/+WlJ//lpSf/5aUn/+WlJ//lpSf/5aUn/+WlJ//lpSf/5aUn5+WmJ83lpif/5aYn/+WmJ//lpif/5aYn/+WmJ//lpif/5aYn/+WmJ//lpif/5aYn/+WmJ//lpif/5aUm/+WkI//mqCv/67lV//TXn//88+L///79//////////////////////////7/+ezQ/+3AaP/y05X////////////////////////////02aT/5aUm/+WmJ//lpif/5aYn/+WmJ//lpif/5aYn/+WmJ//lpif/5aYn/+WmJ//lpif/5aYnzeamJ6Tmpif/5qYn/+amJ//mpif/5qYn/+amJ//mpif/5qYn/+amJ//mpif/5qYn/+amJ//mpif/5qYn/+amJ//mpif/5aUk/+amJ//pskT/8c2G//ns0P/+/fn///////////////////////768//88+P////+///////////////////////35L3/5qgr/+amJ//mpif/5qYn/+amJ//mpif/5qYn/+amJ//mpif/5qYn/+amJ//mpif/5qYnpOamJ2/mpif85qYn/+amJ//mpif/5qYn/+amJ//mpif/5qYn/+amJ//mpif/5qYn/+amJ//mpif/5qYn/+amJ//mpif/5qYn/+amJ//mpSX/5qUk/+isNv/uw23/9+K5//357//////////////////////////////////////////////////67dP/6Kw0/+amJv/mpif/5qYn/+amJ//mpif/5qYn/+amJ//mpif/5qYn/+amJ//mpif85qYnb+enJzfnpifp5qYn/+amJ//mpif/5qYn/+amJ//mpif/5qYn/+amJ//mpif/5qYn/+amJ//mpif/5qYn/+amJ//mpif/5qYn/+amJ//mpif/5qYn/+amJv/mpST/56ks/+y5Vf/01pz/+/He///+/P/////////////////////////////////89OT/6bFB/+amJv/mpif/5qYn/+amJ//mpif/5qYn/+amJ//mpif/5qYn/+amJ//mpifp56cnN+enKA3npye856cn/+enJ//npyf/56cn/+enJ//npyf/56cn/+enJ//npyf/56cn/+enJ//npyf/56cn/+enJ//npyf/56cn/+enJ//npyf/56cn/+enJ//npyf/56cn/+emJf/npib/6rFA//DJfP/458T//vrz///////////////////////9+e//67dO/+emJf/npyf/56cn/+enJ//npyf/56cn/+enJ//npyf/56cn/+enJ//npye856coDQAAAADnpyhz56co/+enKP/npyj/56co/+enKP/npyj/56co/+enKP/npyj/56co/+enKP/npyj/56co/+enKP/npyj/56co/+enKP/npyj/56co/+enKP/npyj/56co/+enKP/npyj/56Ym/+emJP/oqzD/7b1c//XZof/78d3//v36///////99+v/67VL/+emJf/npyj/56co/+enKP/npyj/56co/+enKP/npyj/56co/+enKP/npyhzAAAAAAAAAADopygo6Kco4einKP/opyj/6Kco/+inKP/opyj/6Kco/+inKP/opyj/6Kco/+inKP/opyj/6Kco/+inKP/opyj/6Kco/+inKP/opyj/6Kco/+inKP/opyj/6Kco/+inKP/opyj/6Kco/+inKP/opyf/6KYl/+inJ//qsD7/78Nt//TUlf/wx3f/6Kot/+inJ//opyj/6Kco/+inKP/opyj/6Kco/+inKP/opyj/6Kco/+inKOHopygoAAAAAAAAAADoqCkB6KgokeioKP/oqCj/6Kgo/+ioKP/oqCj/6Kgo/+ioKP/oqCj/6Kgo/+ioKP/oqCj/6Kgo/+ioKP/oqCj/6Kgo/+ioKP/oqCj/6Kgo/+ioKP/oqCj/6Kgo/+ioKP/oqCj/6Kgo/+ioKP/oqCj/6Kgo/+ioKP/opyb/6KYl/+imJf/opyX/6Kco/+ioKP/oqCj/6Kgo/+ioKP/oqCj/6Kgo/+ioKP/oqCj/6Kgo/+ioKJHoqCkBAAAAAAAAAAAAAAAA6agoLumoKOLpqCj/6ago/+moKP/pqCj/6ago/+moKP/pqCj/6ago/+moKP/pqCj/6ago/+moKP/pqCj/6ago/+moKP/pqCj/6ago/+moKP/pqCj/6ago/+moKP/pqCj/6ago/+moKP/pqCj/6ago/+moKP/pqCj/6ago/+moKP/pqCj/6ago/+moKP/pqCj/6ago/+moKP/pqCj/6ago/+moKP/pqCj/6ago4umoKC4AAAAAAAAAAAAAAAAAAAAAAAAAAOmoKH3pqCj+6ago/+moKP/pqCj/6ago/+moKP/pqCj/6ago/+moKP/pqCj/6ago/+moKP/pqCj/6ago/+moKP/pqCj/6ago/+moKP/pqCj/6ago/+moKP/pqCj/6ago/+moKP/pqCj/6ago/+moKP/pqCj/6ago/+moKP/pqCj/6ago/+moKP/pqCj/6ago/+moKP/pqCj/6ago/+moKP/pqCj+6agofQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOqoKRbqqCi+6qgo/+qoKP/qqCj/6qgo/+qoKP/qqCj/6qgo/+qoKP/qqCj/6qgo/+qoKP/qqCj/6qgo/+qoKP/qqCj/6qgo/+qoKP/qqCj/6qgo/+qoKP/qqCj/6qgo/+qoKP/qqCj/6qgo/+qoKP/qqCj/6qgo/+qoKP/qqCj/6qgo/+qoKP/qqCj/6qgo/+qoKP/qqCj/6qgo/+qoKP/qqCi+6qkoFgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADqqSk76qkp4uqpKf/qqSn/6qkp/+qpKf/qqSn/6qkp/+qpKf/qqSn/6qkp/+qpKf/qqSn/6qkp/+qpKf/qqSn/6qkp/+qpKf/qqSn/6qkp/+qpKf/qqSn/6qkp/+qpKf/qqSn/6qkp/+qpKf/qqSn/6qkp/+qpKf/qqSn/6qkp/+qpKf/qqSn/6qkp/+qpKf/qqSn/6qkp/+qpKeLqqSk7AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA6qkpXeqpKfDrqSn/66kp/+qpKf/rqSn/66kp/+qpKf/qqSn/66kp/+qpKf/qqSn/66kp/+qpKf/qqSn/66kp/+qpKf/qqSn/66kp/+upKf/qqSn/66kp/+upKf/qqSn/66kp/+upKf/qqSn/66kp/+upKf/qqSn/66kp/+upKf/qqSn/66kp/+upKf/qqSn/66kp8OqpKV0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA66kpA+upKXHrqSn066kp/+upKf/rqSn/66kp/+upKf/rqSn/66kp/+upKf/rqSn/66kp/+upKf/rqSn/66kp/+upKf/rqSn/66kp/+upKf/rqSn/66kp/+upKf/rqSn/66kp/+upKf/rqSn/66kp/+upKf/rqSn/66kp/+upKf/rqSn/66kp/+upKf/rqSn066kpceupKQMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOuqKQXrqilx66op8euqKf/rqin/66op/+uqKf/rqin/66op/+uqKf/rqin/66op/+uqKf/rqin/66op/+uqKf/rqin/66op/+uqKf/rqin/66op/+uqKf/rqin/66op/+uqKf/rqin/66op/+uq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I5janiPf2p4j+9qeI//aniP/2p4j/9qeI//aniP/2p4j/9qeI//aniP/2p4j+9qeI9/anyOY2p8jN9ufIwMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA258jGtufI4rbnyPq258j/9ufI//bnyP/258j/9ufI//bnyP/258j/9ufI//bnyP/258j/9ufI//bnyP/258j/9ufI//bnyPq258jitufIxoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANygIzXbnyPC258j/tufI//bnyP/258j/9ufI//bnyP/258j/9ufI//bnyP/258j/9ufI//bnyP/258j/9ufI//bnyP/258j/9ufI//bnyP+258jwtygIzUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADcoCNB3KAj2dygI//coCP/3KAj/9ygI//coCP/3KAj/9ygI//coCP/3KAj/9ygI//coCP/3KAj/9ygI//coCP/3KAj/9ygI//coCP/3KAj/9ygI//coCP/3KAj2dygI0EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA3aAkNt2gJNjdoCT/3aAk/92gJP/doCT/3aAk/92gJP/doCT/3aAk/92gJP/doCT/3aAk/92gJP/doCT/3aAk/92gJP/doCT/3aAk/92gJP/doCT/3aAk/92gJP/doCT/3aAk2N2gJDYAAAAAAAAAAAAAAAAAAAAAAAAAAN6hJBrdoSTB3aEk/92hJP/doST/3aEk/92hJP/doST/3aEk/92hJP/doST/3aEk/92hJP/doST/3aEk/92hJP/doST/3aAj/92gIv/doST/3aEk/92hJP/doST/3aEk/92hJP/doST/3aEkwd6hJBoAAAAAAAAAAAAAAADfoiUC3qEkid6hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEk/96gIv/gpi//4ao6/96iJf/eoST/3qEk/96hJP/eoST/3qEk/96hJP/eoST/3qEkid+iJQIAAAAAAAAAAN+iJDjfoSTp36Ek/9+hJP/foST/36Ek/9+hJP/foST/36Ek/9+hJP/foST/36Ek/9+hJP/foST/36Ek/96hI//foiT/57pe//bmxP/68Nz/57lb/96gIv/foST/36Ek/9+hJP/foST/36Ek/9+hJP/foSTp36IkOAAAAADgoyUD36Ill9+iJf/foiX/36Il/9+iJf/foiX/36Il/9+iJf/foiX/36Il/9+iJf/foiX/36Il/9+iJP/foSL/4qk2/+/Rk//9+O7////////////x1p7/36Ej/9+iJP/foiX/36Il/9+iJf/foiX/36Il/9+iJf/foiWX4KMlA+CiJSrgoiXf4KIl/+CiJf/goiX/4KIl/+CiJf/goiX/4KIl/+CiJf/goiX/4KIl/+CiJf/goiT/4KIl/+e5Wv/36Mj///79//////////////////blwv/hpSv/4KIk/+CiJf/goiX/4KIl/+CiJf/goiX/4KIl/+CiJd/goiUq4aMlbOGjJfvhoyX/4aMl/+GjJf/hoyX/4aMl/+GjJf/hoyX/4aMl/+GjJf/hoyX/4KIk/+KnMP/vz47//Pfs////////////////////////////+vHd/+OrOv/goiT/4aMl/+GjJf/hoyX/4aMl/+GjJf/hoyX/4aMl++GjJWzhoyWt4aMl/+GjJf/hoyX/4aMl/+GjJf/hoyX/4aMl/+GiJP/hoiL/4aIi/+GiI//hoiL/68Fs//79+v/////////////////////////////////9+fD/57VP/+GiI//hoyX/4aMl/+GjJf/hoyX/4aMl/+GjJf/hoyX/4aMlreKkJtnipCb/4qQm/+KkJv/ipCb/4qMl/+KiI//ipSj/5a4//+q9Yv/swm//5rBE/+KiIv/lrj//9+fH///////////////////////////////////+/P/rwWv/4aIi/+KkJv/ipCb/4qQm/+KkJv/ipCb/4qQm/+KkJv/ipCbZ46Qm8uOkJv/jpCb/46Qm/+OkJv/jpSn/7MFr//XftP/78+L//vz5///+/v/78uD/7sl+/+OnLP/mr0D/9+bC//////////////////////////////////DOiv/ioyL/46Qm/+OkJv/jpCb/46Qm/+OkJv/jpCb/46Qm/+OkJvLjpCb946Qm/+OkJv/jpCb/46Ql/+SoLv/13q////78///////////////////////+/fn/9eC1/+izSf/mrTv/9uK5/////v//////////////////////9Nup/+OkJv/jpCb/46Qm/+OkJv/jpCb/46Qm/+OkJv/jpCb/46Qm/eSlJv3kpSb/5KUm/+SlJv/kpSb/5KUm/+aqM//twmz/9uK5//358f//////////////////////+/Ph/+7Hef/nsED/9d6v///+/v/////////////////458X/5agt/+SlJv/kpSb/5KUm/+SlJv/kpSb/5KUm/+SlJv/kpSb95aUn8uWlJ//lpSf/5aUn/+WlJ//lpSf/5KUm/+SkI//lqCz/67lX//TZov/89OT////+/////////////vz5//Xfsv/ru1r/9dys///+/f////////////vx3P/nrTr/5KUl/+WlJ//lpSf/5aUn/+WlJ//lpSf/5aUn/+WlJ/LlpifZ5aYn/+WmJ//lpif/5aYn/+WmJ//lpif/5aYn/+WmJv/lpST/5aYn/+mzRv/xz4r/+u3T//79+v////////////vy4P/z1pv//Pbo/////////////fjt/+q1S//lpST/5aYn/+WmJ//lpif/5aYn/+WmJ//lpif/5aYn2eamJ63mpif/5qYn/+amJ//mpif/5qYn/+amJ//mpif/5qYn/+amJ//mpif/5qUl/+alJf/orTj/78Vx//fkvf/9+fH////////+/f///v7////////////+/Pj/7b5h/+alJP/mpif/5qYn/+amJ//mpif/5qYn/+amJ//mpiet56cnbOenJ/vnpyf/56cn/+enJ//npyf/56cn/+enJ//npyf/56cn/+enJ//npyf/56cn/+amJv/mpST/56ku/+y7WP/02KD//PPh///+/f///////////////v/wx3f/5qUk/+enJ//npyf/56cn/+enJ//npyf/56cn++enJ2znpygq56co3+enKP/npyj/56co/+enKP/npyj/56co/+enKP/npyj/56co/+enKP/npyj/56co/+enKP/npyf/56Yl/+enJ//qskL/8ct///nnxP/9+fH////+//HJfP/npST/56co/+enKP/npyj/56co/+enKP/npyjf56coKuenKAPopyiX6Kco/+inKP/opyj/6Kco/+inKP/opyj/6Kco/+inKP/opyj/6Kco/+in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R//msUf/5rFF//rw3P////////////347//ntE3/4aIj/+KjJf/ioyX/4qMl4+OkJvvjpCX/5Kct//LVm//89+z//Pfs//HTlv/txnb/+/Lg///////+/fv/68Bo/+KjIv/jpCb/46Qm/+OkJvvkpSb75KUm/+SlJ//ps0j/8dCO//rv1////fv/+OnL//LTlv/78+L///////DMhf/kpCP/5KUm/+SlJv/kpSb75qYn4+amJ//mpif/5aUl/+WlJf/orjr/78Z1//jnxP/78+H//PTk///////02KL/5aUl/+amJ//mpif/5qYn4+enJ6fnpyf/56cn/+enJ//npyf/56Ym/+elJP/oqi//7b1d//Xapv/89OT/9t6t/+enKf/npyf/56cn/+enJ6fopyhJ6Kgo7eioKP/oqCj/6Kgo/+ioKP/oqCj/6Kcn/+imJf/oqCj/67JC/+u0Rf/oqCj/6Kgo/+ioKO3opyhJ6agoBumoKJLqqCj/6qgo/+qoKP/qqCj/6qgo/+qoKP/qqCj/6qgo/+moJ//pqCf/6qgo/+qoKP/pqCiS6agoBgAAAADqqSkY66kpsOupKf/rqSn/66kp/+upKf/rqSn/66kp/+upKf/rqSn/66kp/+upKf/rqSmw6qkpGAAAAAAAAAAAAAAAAOyqKRjsqimS7Kop7+yqKf/sqin/7Kop/+yqKf/sqin/7Kop/+yqKe/sqimS7KopGAAAAAAAAAAAAAAAAAAAAAAAAAAA7asqB+2rKkntqyqo7asq5O2rKvvtqyr77asq5O2rKqjtqypJ7asqBwAAAAAAAAAAAAAAAPgfAADgBwAAwAMAAIABAACAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAEAAIABAADAAwAA4AcAAPgfAAA=" alt="tg群"></a>
-  </div>
-
-    </header>
-
-<div id="main-container">
-
-    <!-- Left menu container -->
-    <div id="left-container">
-        <ul id="menu">
-            <li onclick="scrollToSection('anime')">在线</li>
-            <li onclick="scrollToSection('down')">下载</li>
-            <li onclick="scrollToSection('comic')">漫画</li>
-            <li onclick="scrollToSection('novel')">小说</li>
-            <li onclick="scrollToSection('game')">游戏</li>
-            <li onclick="scrollToSection('movie')">影视</li>
-            <li onclick="scrollToSection('trace')">找出处</li>
-            <li onclick="scrollToSection('ndbt')">网盘BT</li>
-	        <li onclick="scrollToSection('wiki')">资料</li>	
-            <li onclick="scrollToSection('pic')">美图</li>  
-            <li onclick="scrollToSection('more')">更多</li>
-            <li onclick="scrollToSection('ai')">A·I</li>
-	        <li onclick="scrollToSection('pc')">P·C</li>
-            <li onclick="scrollToSection('app')">APP</li>
-        </ul>
+<div id="container">
+    <div id="image-container">
+        <img id="randomImage" src="" alt="Random Image">
     </div>
 
-    <!-- Right content container -->
-    <div id="right-container">
-	  
-
-        <section id="anime">
-            <h3>在线动漫</h3>
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-category="all">全部</button>
-                <button class="filter-btn" data-category="推荐">推荐</button>
-            </div>
-            <div class="grid-container">
- 		     <a href="https://dick.xfani.com/" class="grid-item" data-category="推荐"  title="主打新番，清晰度1080p，400M+大，更新较快，无国产动画"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">稀饭动漫</div>
-                    </div>
-                </a>
-
-     
-                <a href="https://anime.girigirilove.com" class="grid-item" data-category="推荐"  title="资源搬字幕组的，300M+大小，有简繁双线路，无国产，推荐"   target="_blank">
-                    <div class="content">
-                        <div class="icons">
-                            <img src="" alt="">
-                        </div>
-                        <div class="text-content">GriGri爱动漫</div>
-                    </div>
-               </a>		    
-	            <a href="https://www.nyafun.net/" class="grid-item"  data-category="推荐" title="新旧番都有，清晰度好，大小300M左右，无国产"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">NyaFun动漫</div>
-                    </div>
-                </a>
-		        <a href="https://aniopen.an-i.workers.dev/" class="grid-item" data-category="推荐"  title="繁体，搬运动画疯1080P，同步更新，提供在线/下载，需要翻墙"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">ANi-需翻</div>
-                    </div>
-                </a>		    
-                <a href="https://www.kelatv.com/" class="grid-item"  title="有国产动画，新番清晰度220M+，老番不太全"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">哈哩哈哩</div>
-                    </div>
-                </a>  		    
-                <a href="https://www.moefun.net/" class="grid-item"  title="在线站关闭了好像，目前仅剩APP"   target="_blank">
-                    <div class="content">
-                        <div class="icons-other">
-                            <img src="https://p.upyun.com/demo/tmp/F1fyqlFS.webp" alt="萌番&嗷呜动漫"> 
-                        </div>
-                        <div class="text-content">萌番&嗷呜动漫</div>
-                    </div>
-                </a>		    
-                <a href="https://www.qdm66.com/" class="grid-item"  title="线路换的快，中日都有，老番挺多"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">趣动漫</div>
-                    </div>
-                </a>   
-		    
-                 <a href="https://www.skr3.cc/" class="grid-item"    title="线路多，分类多，清晰度一般"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">樱之空动漫</div>
-                    </div>
-                </a>
-		    
-                <a href="https://ads-static.xhscdn.com/crm/104101sg314kceo3tg206crb9bg0000001c1h4j1m7si14" class="grid-item"  title="只有日番，新番清晰度高，更新较快"   target="_blank">
-                    <div class="content">
-                        <div class="icons-other">
-                            <img src="https://p0.ssl.qhimg.com/t016852bd7df93fb9de.png" alt="番薯动漫"> 
-                        </div>
-                        <div class="text-content">番薯动漫</div>
-                    </div>
-                </a>
-
-
-                <a href="https://www.dqsj.top/" class="grid-item"  title="清晰度720/1080p，更新较快，人机验证比较多"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">打驴动漫</div>
-                    </div>
-                </a>
-                <a href="https://www.agedm.org/" class="grid-item"  title="视频100M+大小，低清，更新快但不推荐用"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">AGE动漫</div>
-                    </div>
-                </a>
-                <a href="https://www.acfuns.net/" class="grid-item"  title="老番挺多，有部分国产，多线路清晰度不均"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">ACFun动漫</div>
-                    </div>
-                </a>
-                <a href="http://m.dodoge.me/" class="grid-item"  title="清晰度1080p，部分国产有，旧番资源不太稳定"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">哔咪哔咪</div>
-                    </div>
-                </a>
-                <a href="http://www.ntdm9.com/" class="grid-item" data-category="推荐" title="新番清晰度高，有国产，旧番跟其他网站一样码率低"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">NT动漫</div>
-                    </div>
-                </a>
-                 <a href="https://www1.aniwave.ch/home" class="grid-item" data-category="推荐"   title="英字，搬运国产，日本动漫"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">1aniwave</div>
-                    </div>
-                </a>		    
-                <a href="https://mengdaohang.com/category-48.html" class="grid-item"  title="有的估计要开代理"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">樱花动漫大全</div>
-                    </div>
-                </a>		    
-            </div>
-        </section>
-
-        <section id="down">
-            <h3>动漫下载、BT|网盘|字幕</h3>
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-category="all">全部</button>
-                <button class="filter-btn" data-category="BT磁力下载">磁力下载</button>
-                <button class="filter-btn" data-category="网盘下载">网盘</button>
-                <button class="filter-btn" data-category="字幕">字幕</button>
-            </div>
-            <div class="grid-container">
-                <a href="https://share.dmhy.org/" class="grid-item" data-category="BT磁力下载"  title="字幕组发布地，需要开代理进入"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">动漫花园</div>
-                    </div>
-                </a>
-                <a href="https://nyaa.si/" class="grid-item" data-category="BT磁力下载"  title="国外ACG的BT站，生肉比较多，需要代理"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">NYAA</div>
-                    </div>
-                </a>
-		    
-                <a href="https://vcb-s.com/" class="grid-item" data-category="BT磁力下载"  title="一个动画压制组发布站"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">VCB-S</div>
-                    </div>
-                </a>		    
-                <a href="https://dmhy.gate.flag.moe" class="grid-item" data-category="BT磁力下载"  title="目前不用代理"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">动漫花园-免翻</div>
-                    </div>
-                </a>		    
-		        <a href="https://nyaa.land/" class="grid-item" data-category="BT磁力下载"  title="免番"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">NYAA-免翻</div>
-                    </div>
-                </a>
-                
-                <a href="https://mikanime.tv/" class="grid-item" data-category="BT磁力下载"  title="界面好看，新番更新分类做得好，可RSS订阅下载BT"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">蜜柑计划-免翻</div>
-                    </div>
-                </a>	    
-                <a href="https://share.acgnx.se/" class="grid-item" data-category="BT磁力下载"  title="BT发布站"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">末日动漫</div>
-                    </div>
-                </a>
-
-		        <a href="https://acg.rip/" class="grid-item" data-category="BT磁力下载"  title="ACGN种子发布站"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">ACG.RIP</div>
-                    </div>
-                </a>
-		<a href="https://hacg.me/" class="grid-item" data-category="BT磁力下载"  title="未成年勿入，发布里番，漫画，游戏磁力链"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">琉璃神社</div>
-                    </div>
-                </a>    
-                <a href="https://bangumi.moe/" class="grid-item" data-category="BT磁力下载"  title="需梯子，UI好看，部分字幕组BT首发地"   target="_blank">
-                    <div class="content">
-                        <div class="square-bg"></div>
-                        <div class="text-content">萌番组</div>
-                    </div>
-                </a>
-	    
-                <a href="https://www.iyxdm.org/" class="grid-item" data-category="网盘下载"  title="提供百度网盘资源，点击开启虫洞然后刷新页面"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">怡萱动漫</div>
-                    </div>
-                </a>
-                <a href="https://www.acgndog.com//" class="grid-item" data-category="网盘下载"  title="资源为百度/阿里网盘，主打动画；漫画小说也有"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">次元狗</div>
-                    </div>
-                </a>
-                <a href="https://www.tsdm39.com/forum.php" class="grid-item" data-category="网盘下载"  title="老牌网盘资源站，主打动画/音乐"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">天使动漫论坛</div>
-                    </div>
-                </a>
-
-                <a href="http://www.2cycd.com/" class="grid-item" data-category="网盘下载"  title="有旧番资源，网盘/磁力"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">二次元虫洞</div>
-                    </div>
-                </a>
-
-                <a href="https://bbs.acgrip.com/" class="grid-item" data-category="字幕" title="动画字幕,vcb的论坛"   target="_blank">
-                    <div class="content">
-                        <div class="icons-other">
-                            <img src="https://bbs.acgrip.com/favicon.ico" alt="Anime字幕论坛">
-                        </div>
-                        <div class="text-content">Anime字幕论坛</div>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <section id="comic">
-            <h3>在线漫画、下载</h3>
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-category="all">全部</button>
-                <button class="filter-btn" data-category="在线漫画">在线漫画</button>
-                <button class="filter-btn" data-category="漫画下载">漫画下载</button>
-            </div>
-            <div class="grid-container"> 
-                <a href="https://www.mangacopy.com/" class="grid-item" data-category="在线漫画"  title="目前比较全的日漫、韩漫、美漫也有"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">拷贝漫画</div>
-                    </div>
-                </a>		    
-                <a href="https://www.baozimh.com/" class="grid-item" data-category="在线漫画"  title="国、日、韩漫都有"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">包子漫画</div>
-                    </div>
-                </a>
-          	<a href="https://tw.manhuagui.com/" class="grid-item" data-category="在线漫画"  title="需要开代理，资源很全"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">漫画柜</div>
-                    </div>
-                </a>	
-                <a href="https://www.mansou.co/" class="grid-item" data-category="在线漫画"  title="聚合漫画搜索"   target="_blank">
-                    <div class="content">
-                        <div class="square-bg"></div>
-                        <div class="text-content">漫搜</div>
-                    </div>
-                </a>		    
-		<a href="https://nav.telltome.net/" class="grid-item" data-category="在线漫画"  title="有韩、国漫，广告多"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">G站漫画</div>
-                    </div>
-                </a>		    
-		    
-
-		<a href="https://www.52hah.com/" class="grid-item" data-category="在线漫画"  title="资源较多"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">聚合漫画</div>
-                    </div>
-                </a>
-                <a href="https://www.colamanga.com/" class="grid-item" data-category="在线漫画"  title="在线国产漫画"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">Colamanga</div>
-                    </div>
-                </a>
-                <a href="https://www.mangabz.com/" class="grid-item" data-category="在线漫画"  title="在线日本漫画"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">Mangabz</div>
-                    </div>
-                </a>		    
-                <!-- <a href="https://nicohub.cc/index" class="grid-item" data-category="在线漫画"  title="漫画，轻小说都有"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">Nico</div>
-                    </div>
-                </a> -->
-
-                <a href="https://komiic.com/" class="grid-item" data-category="在线漫画"  title=""   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">最夯 | Komiic漫畫</div>
-                    </div>
-                </a>
-                <a href="https://www.mh160.cc/" class="grid-item" data-category="在线漫画"  title="在线漫画"   target="_blank">
-                    <div class="content">
-                        <div class="square-bg"></div>
-                        <div class="text-content">漫画160</div>
-                    </div>
-                </a>
-                <a href="https://www.comicbackup.com/" class="grid-item" data-category="漫画下载"  title="漫画下载"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">Kindle漫画-漫画下载</div>
-                    </div>
-                </a>		    
-                <a href="https://kox.moe/" class="grid-item" data-category="漫画下载"  title="付费下载漫画"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">Kox漫画下载</div>
-                    </div>
-                </a>		    
-            </div>
-        </section>
-
-        <section id="novel">
-            <h3>在线轻小说、网文下载</h3>
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-category="all">全部</button>
-                <button class="filter-btn" data-category="在线轻小说">在线轻小说</button>
-                <button class="filter-btn" data-category="小说下载">小说下载</button>
-            </div>
-            <div class="grid-container">
-                <a href="https://www.wenku8.net/index.php" class="grid-item" data-category="在线轻小说"  title="目前开放注册了，需要登录，有日轻在线/下载"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">轻小说文库</div>
-                    </div>
-                </a>		    
-                <a href="https://www.linovelib.com/" class="grid-item" data-category="在线轻小说"  title="在线轻小说"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">哔哩轻小说</div>
-                    </div>
-                </a>
-                <a href="http://www.shencou.com/" class="grid-item" data-category="在线轻小说"  title="在线轻小说"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">神凑轻小说</div>
-                    </div>
-                </a>
-
-                <a href="https://www.qianbitxt.com/" class="grid-item" data-category="在线轻小说"  title="网文+轻小说"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">铅笔小说</div>
-                    </div>
-                </a>
-                <a href="https://zh.singlelogin.re/" class="grid-item" data-category="小说下载"  title="需要梯子，世界最大の電子書籍，海量电子书下载"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">Z-Library</div>
-                    </div>
-                </a>		    
-                <a href="https://masiro.me/admin" class="grid-item" data-category="在线轻小说"  title="需要注册"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">真白萌 </div>
-                    </div>
-                </a>
-
-                <a href="https://www.lightnovel.us/" class="grid-item" data-category="在线轻小说"  title="轻之国度"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">轻之国度</div>
-                    </div>
-                </a>
-
-                <a href="https://www.huangdizhijia.com/index.html" class="grid-item" data-category="小说下载" title=">网文txt下载"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">网文txt下载</div>
-                    </div>
-                </a>
-                <a href="https://mobinovels.com/" class="grid-item" data-category="小说下载" data-category="小说下载"  title="轻小说EPUB下载，密码看右上公告6195"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">魔笔轻小说-EPUB下载</div>
-                    </div>
-                </a>
-                <a href="https://books.fishhawk.top/" class="grid-item" data-category="小说下载"data-category="小说下载"  title="提供轻小说下载与AI翻译"   target="_blank">
-                    <div class="content">
-                        <div class="icons-other">
-                            <img src="https://books.fishhawk.top/favicon.ico" alt="轻小说机翻">
-                        </div>
-                        <div class="text-content">轻小说机翻</div>
-                    </div>
-                </a>		    
-            </div>	
-        </section>
-
-        <section id="game">
-            <h3>GALGAME下载</h3>
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-category="all">全部</button>
-                <button class="filter-btn" data-category="论坛攻略">论坛攻略</button>
-                <button class="filter-btn" data-category="工具">工具</button>
-            </div>
-            <div class="grid-container">
-                <a href="https://www.touchgal.org/" class="grid-item"  title="汉化GAL下载"   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">Touchgal</div>
-                                                        </div>
-                            <img class="tooltip-btn" src="static/gray-down.png"></img>
-                        </a>    
-                        <a href="https://www.ttloli.com" class="grid-item"  title="老牌GAL站，不知道还能活多久"   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">忧郁的萝莉</div>
-                            </div>
-                        </a>
- 		    
-                <a href="https://www.galxp.com/" class="grid-item"  title="GAL、黄油"   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">GALXP分享你的XP</div>
-                            </div>
-                        </a>
-                <a href="https://www.galzy.eu.org/" class="grid-item" data-category="工具"  title="有大部分电脑端与手机端的汉化Galgame，可能要翻"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">紫缘社</div>
-                    </div>
-                </a> 
-                <a href="https://www.lzacg.net/" class="grid-item"  title="GAL下载"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">量子ACG </div>
-                    </div>
-                </a>    
-                <a href="https://www.gogalgame.com/" class="grid-item"  title="GAL下载"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">绅士天堂</div>
-                    </div>
-                </a>
-                <a href="https://www.soraacg.com/" class="grid-item"  title="GAL下载"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">穹之下</div>
-                    </div>
-                </a>
-                <a href="https://www.shinnku.com/" class="grid-item"  title="GAL下载"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">失落小站</div>
-                    </div>
-                </a>
-                <a href="https://bbs.kfpromax.com/login.php" class="grid-item" data-category="论坛攻略"  title=""   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">绯月论坛</div>
-                    </div>
-                </a>
-
-                <a href="https://2dfan.com/" class="grid-item" data-category="论坛攻略"  title="补丁/CG/攻略"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">2DFan-汉化补丁下载</div>
-                    </div>
-                </a>
-                <a href="https://blog.reimu.net/" class="grid-item" data-category="论坛攻略"  title="下载链接看新手指南，需要代理"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">灵梦御所</div>
-                    </div>
-                </a>
-                <a href="https://m.avicone.com/heji/200.html" class="grid-item" data-category="工具" title="模拟器合集下载"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">GalGame模拟器大全</div>
-                    </div>
-                </a>
-                <a href="https://koyso.com/" class="grid-item" data-category="单机游戏"  title="建议用迅雷下载"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">单机游戏下载-koyso</div>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <section id="movie">
-            <h3>在线影视、影片下载</h3>
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-category="all">全部</button>
-                <button class="filter-btn" data-category="在线观看">在线观看</button>
-                <button class="filter-btn" data-category="下载">下载</button>
-                <button class="filter-btn" data-category="字幕">字幕</button>
-            </div>
-            <div class="grid-container">
-		        <a href="https://dl.kkys03.com/" class="grid-item" data-category="在线观看，资源多更新快，清晰度一般"  title="在线播放"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">可可影视</div>
-                    </div>
-                </a>
-     
-		        <a href="https://www.gying.net/" class="grid-item" data-category="下载" title="下片推荐使用，提供磁力/在线/网盘，多种清晰度选择"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">BTNULL</div>
-                    </div>
-                </a> 
-		        <a href="https://domp4.icu/" class="grid-item" data-category="下载"  title="主下载电影用，资源全面，有动画电视剧，提供磁力或电驴"   target="_blank">
-                    <div class="content">
-                        <div class="square-bg"></div>
-                        <div class="text-content">Mp4电影</div>
-                    </div>
-                </a>		    
-                <a href="https://www.ikanbot.com/" class="grid-item" data-category="在线观看"  title="多线路，清晰度一般"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">爱看机器人</div>
-                    </div>
-                </a>
-		    
-                <a href="https://ddys.pro/" class="grid-item" data-category="在线观看"  title="在线播放"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">低端影视</div>
-                    </div>
-                </a>		    
-		    
-                <a href="https://libvio.cc/" class="grid-item" data-category="在线观看"  title="在线/网盘"   target="_blank">
-                    <div class="content">
-                        <div class="square-bg"></div>
-                        <div class="text-content">LIBVIO</div>
-                    </div>
-                </a>		       
-
-                <a href="https://www.yanaifei.net/" class="grid-item" data-category="在线观看"  title="在线播放"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">鸭奈飞</div>
-                    </div>
-                </a>
-                <a href="https://www.hcd666.com/" class="grid-item" data-category="在线观看"  title="在线播放"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">日剧网</div>
-                    </div>
-                </a>		    
-                <a href="https://www.555dyy14.com/" class="grid-item" data-category="在线观看"  title="在线播放"   target="_blank">
-                    <div class="content">
-                        <div class="icons-other">
-                            <img src="https://favicon.im/55wutalk.com" alt="555电影网">
-                        </div>
-                        <div class="text-content">555电影网</div>
-                    </div>
-                </a>
-                <a href="https://www.kpkuang.fun/" class="grid-item" data-category="在线观看"  title="多源搜索"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">看片狂人 </div>
-                    </div>
-                </a>
-                <a href="https://www.dy2018.com/" class="grid-item" data-category="下载"  title="电影下载"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">电影天堂-电影下载</div>
-                    </div>
-                </a>
-                <a href="http://www.bd2121.com/" class="grid-item" data-category="下载"  title="影视下载"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">BD影视分享</div>
-                    </div>
-                </a>
-                <a href="https://www.meijutt.tw/" class="grid-item" data-category="下载"  title="美剧下载"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">美剧天堂</div>
-                    </div>
-                </a>
-                <a href="https://subhd.tv/" class="grid-item" data-category="字幕" title="字幕下载"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">SubHD-下载字幕</div>
-                    </div>
-                </a>
-                <a href="https://assrt.net/" class="grid-item"  data-category="字幕" title="字幕下载"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">射手网（伪）</div>
-                    </div>
-                </a>
-
-            </div>
-        </section>
-
-        <section id="trace">
-            <h3>截图找出处、台词找出处</h3>
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-category="all">全部</button>
-                <button class="filter-btn" data-category="搜动画">搜动画</button>
-                <button class="filter-btn" data-category="搜插画">搜插画</button>
-                <button class="filter-btn" data-category="万能搜">万能搜</button>
-            </div>
-            <div class="grid-container">
-		        <a href="http://www.iqdb.org/" class="grid-item" data-category="搜插画"  title="多网址搜索，可直接跳转其他网址搜索，便利"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">Iqdb</div>
-                    </div>
-                </a> 
-                <a href="https://trace.moe/" class="grid-item" data-category="搜动画"  title="动画截图找到出处，精确到秒，需整洁截图，准确率高"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">以图搜动画</div>
-                    </div>
-                </a>
-
-                <a href="https://soutubot.moe//" class="grid-item"  title="可识别EXH本子，出处有直达链接"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">搜图酱-以图搜本子</div>
-                    </div>
-                </a>
-                <a href="https://ai.animedb.cn/" class="grid-item" data-category="搜动画"  title="可识别动画、GAL截图找出处，准确率不高"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">AnimeTrace</div>
-                    </div>
-                </a> 
-                
-               <a href="https://saucenao.com/" class="grid-item" data-category="搜插画"  title="插画比较好使，可跳转其他搜图网站"   target="_blank">
-                <div class="content">
-                    <div class="icons"><img src="" alt=""></div>
-                    <div class="text-content">SauceNAO</div>
-                </div>
-            </a> 
-                <a href="https://images.google.com/imghp?hl=zh-CN&gws_rd=ssl" class="grid-item" data-category="万能搜"  title="识图范围广"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">谷歌识图</div>
-                    </div>
-                </a>
-                <a href="https://yandex.ru/images/search?redircnt=1534581013.1" class="grid-item" data-category="万能搜"  title="毛子识图，感觉比谷歌还强，需要配合翻译"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">Yandex识图</div>
-                    </div>
-                </a> 
-                <a href="https://image.baidu.com/" class="grid-item" data-category="万能搜"  title="随缘"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">百度识图</div>
-                    </div>
-                </a>
-  
-                <a href="https://xslist.org/zh" class="grid-item"  title="识图搜AV女优，需要开代理才能访问"   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">X/sList-以图搜颜</div>
-                            </div>
-                        </a>
-
-               <a href="https://ascii2d.net/" class="grid-item" data-category="搜插画"  title="准确率低且有图但很多没标出处，差评，gal截图可能比较准"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">二次元画像详细检索</div>
-                    </div>
-                </a>		    
-                <a href="http://dialogue.moe/search" class="grid-item" data-category="搜动画"  title="找动画台词，可跳转bangumi"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">Dialogue</div>
-                    </div>
-                </a>
-                <a href="https://as2.bitinn.net/" class="grid-item" data-category="搜动画"  title="找动画台词，直达截图"   target="_blank">
-                    <div class="content">
-                        <div class="square-bg"></div>
-                        <div class="text-content">AnimeShot </div>
-                    </div>
-                </a>
-                <a href="https://33.agilestudio.cn/" class="grid-item"  title="通过台词找电影"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">33台词</div>
-                    </div>
-                </a>
-                <a href="https://www.quodb.com/" class="grid-item"  title="通过英文台词找电影"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">QuoDB</div>
-                    </div>
-                </a>		    
-            </div>
-        </section>
-
-        <section id="ndbt">
-            <h3>网盘资源、磁力搜索</h3>
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-category="all">全部</button>
-                <button class="filter-btn" data-category="网盘搜索">网盘搜索</button>
-                <button class="filter-btn" data-category="磁力搜索">磁力搜索</button>
-            </div>
-            <div class="grid-container">
-                <a href="https://pan666.net/" class="grid-item" data-category="网盘搜索"  title="阿里云资源分享社区"   target="_blank">
-                    <div class="content">
-                        <div class="square-bg"></div>
-                        <div class="text-content">云盘分享</div>
-                    </div>
-                </a>
-
-                <a href="https://bbs.alipansou.com/" class="grid-item" data-category="网盘搜索"  title="云盘资源共享"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">云盘资源共享</div>
-                    </div>
-                </a>
-
-                <a href="http://www.xgsoso.com/?st=0" class="grid-item" data-category="网盘搜索"  title="多网盘搜索"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">西瓜盘搜索引擎</div>
-                    </div>
-                </a>
-                <a href="https://yiso.fun/" class="grid-item" data-category="网盘搜索"  title="网盘搜索"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">易搜</div>
-                    </div>
-                </a>
-
-                <a href="https://www.tianyiso.com/" class="grid-item" data-category="网盘搜索"  title="多网盘搜索"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">天逸搜 </div>
-                    </div>
-                </a>
-
-                <a href="https://www.btsearch.love/" class="grid-item" data-category="磁力搜索"  title="磁力搜"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">BTSearch</div>
-                    </div>
-                </a>
-                <a href="https://lemongb.top/" class="grid-item" data-category="磁力搜索"  title="磁力搜"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">柠檬磁力</div>
-                    </div>
-                </a>
-                <a href="https://wiki.servarr.com/prowlarr/supported-indexers" class="grid-item"  title="磁力站聚合"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">RARBG索引页</div>
-                    </div>
-                </a>
-                <a href="https://beta.magnet.pics/" class="grid-item"  title="在線查看磁力資源的影片截圖"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">磁力印象</div>
-                    </div>
-                </a>		    
-                
-            </div>
-        </section>
-	    
-        <section id="wiki">
-            <h3>WIKI、评分、类似番剧搜索</h3>
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-category="all">全部</button>
-                <button class="filter-btn" data-category="评分排行">评分排行</button>
-                <button class="filter-btn" data-category="番剧搜索">类似番剧搜索</button>
-            </div>
-            <div class="grid-container">
-                <a href="https://bgm.tv/" class="grid-item" data-category="评分排行"  title="ACGN评分/wiki论坛，注册满2-3月可看里番条目，可以用来找番"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">Bangumi</div>
-                    </div>
-                </a>
-                <a href="https://zh.moegirl.org.cn/Mainpage#/flow" class="grid-item"  title="简中ACGN百科，查作品相关、作者推特，查梗等等"   target="_blank">
-                    <div class="content">
-                        <div class="icons-other">
-                            <img src="https://favicon.im/moegirl.org.cn" alt="萌娘百科">
-                        </div>
-                        <div class="text-content">萌娘百科</div>
-                    </div>
-                </a>		    
-		<a href="https://bgmlist.com/" class="grid-item"  title="在播新番表，番剧可跳转正版、BT网站"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">每日放送 | 番组放送</div>
-                    </div>
-                </a>
-		<a href="https://yuc.wiki/" class="grid-item"  title="有C整理的新番表"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">YuC's 历年新番查询</div>
-                    </div>
-                </a>
-		<a href="https://anidb.net/" class="grid-item" data-category="评分排行"  title="英文二次元评分WIKI站"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">AniDB</div>
-                    </div>
-                </a>
-		<a href="https://myanimelist.net/" class="grid-item" data-category="评分排行"  title="欧美最大动漫评分网站"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">MyAnimeList</div>
-                    </div>
-                </a>
-		<a href="https://www.anikore.jp/" class="grid-item" data-category="评分排行"  title="日本动漫评分网站"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">Anikore</div>
-                    </div>
-                </a>    
-
-                <a href="https://anime.bakery.moe/" class="grid-item" data-category="番剧搜索"  title="输入番名，检索喜欢看某番剧的人也喜欢看什么"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">面包动画工坊</div>
-                    </div>
-                </a>
-		<a href="https://leisidianying.com/" class="grid-item" data-category="番剧搜索"  title="输入电影名，检索同分类下的电影"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">寻找类似电影</div>
-                    </div>
-                </a>    
-                <a href="https://chii.ai/" class="grid-item" data-category="番剧搜索"  title="bangumi多标签搜索，可以用来找喜欢的类型的番"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">Bangumi Research</div>
-                    </div>
-                </a>		    
-		<a href="https://hzj.wiki/" class="grid-item"  title="B站番剧删减记录"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">番剧删减表</div>
-                    </div>
-                </a> 		    
-	    </div>
-        </section>
-
-
-        <section id="pic">
-            <h3>壁纸、插画、COS图</h3>
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-category="all">全部</button>
-                <button class="filter-btn" data-category="壁纸">壁纸</button>
-                <button class="filter-btn" data-category="插画">插画</button>
-                <button class="filter-btn" data-category="COS图">COS图</button>
-            </div>
-            <div class="grid-container">
-                <a href="https://nekon.app/" class="grid-item" data-category="插画"  title="有Pixiv、推特的图,有AI搜图,以图搜图功能,海外ip解锁R18"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">次世代二次元涩图</div>
-                    </div>
-                </a>
-
-                <a href="https://www.pixiv.net/" class="grid-item" data-category="插画"  title="需梯子，最大的二次元插画网站，上面有各种画师的作品，设置可开R18"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">Pixiv-P站</div>
-                    </div>
-                </a>
-
-                <a href="https://wallhaven.cc/" class="grid-item" data-category="壁纸"  title="需梯子，高质量、高分辨率的电脑壁纸，二次元图较多,可按标签、分辨率搜索"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">Wallhaven</div>
-                    </div>
-                </a>
-                <a href="https://anime-pictures.net/posts?page=0&lang=zh-cn" class="grid-item" data-category="壁纸"  title="高分辨率，手机尺寸较多的二次元壁纸网,可按标签搜索"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">anime-pictures</div>
-                    </div>
-                </a>
-                <a href="https://galleryepic.com/zh" class="grid-item" data-category="COS图"  title="COSPLAY图，有R18，可能要梯子"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">Gallery Epic</div>
-                    </div>
-                </a>
-                <a href="https://www.vilipix.com/" class="grid-item" data-category="插画"  title="pixiv镜像，大陆阉割版"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">vilipix-P站镜像</div>
-                    </div>
-                </a>
-                <a href="https://yande.re/post" class="grid-item" data-category="插画"  title="需梯子，高分辨率，以标签分类为主的二次元插画网，有r18"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">yande.re</div>
-                    </div>
-                </a>
-
-                <a href="https://hivemoderation.com/ai-generated-content-detection/?demo=image" class="grid-item"  title="判断是否是AI图片"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">AI图鉴定</div>
-                    </div>
-                </a>
-
-            </div>	
-        </section>
-    
-    
-	    <section id="more">
-            <h3>更多资源</h3>
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-category="all">全部</button>
-                <button class="filter-btn" data-category="资源分享">资源分享</button>
-                <button class="filter-btn" data-category="工具">工具</button>
-            </div>
-            <div class="grid-container">
-        		<a href="https://yyzs.cloudns.org/" class="grid-item" data-category="资源分享"  title="博客"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">资源指南</div>
-                    </div>
-                </a>		    
-                <a href="https://www.yckceo.com/" class="grid-item" data-category="资源分享" title="书源，漫画源，TV源" target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">源仓库：阅读/异次元漫画</div>
-                    </div>
-                </a>
-                <a href="https://www.mikuclub.work/" class="grid-item" data-category="资源分享" title="资源分享网站" target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">初音社</div>
-                    </div>
-                </a>
-                <a href="https://www.haoruanmao.com/" class="grid-item" data-category="资源分享" title="资源分享网站" target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">好软猫</div>
-                    </div>
-                </a>
-                <a href="https://keiyoushi.github.io/extensions/" class="grid-item" data-category="工具" title="漫画源" target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">Tachiyomi扩展下载</div>
-                    </div>
-                </a>
-                
-                <a href="https://iui.su/1492/" class="grid-item" data-category="工具" title="齐全的在线工具" target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">网页工具</div>
-                    </div>
-                </a>
-                <a href="https://www.runningcheese.com/extensions/" class="grid-item" data-category="工具"  title="最全最好的扩展插件推荐"   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">最佳浏览器扩展</div>
-                            </div>
-                        </a>
-                <a href="https://www.runningcheese.com/userscripts" class="grid-item" data-category="工具"  title="常用油猴脚本推荐"   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">常用油猴脚本</div>
-                            </div>
-                        </a>    
-            </div>
-        </section>
-
-        <section id="ai">
-            <h3>AI工具</h3>
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-category="all">全部</button>
-                <button class="filter-btn" data-category="文本">文本</button>
-                <button class="filter-btn" data-category="图片">图片</button>
-            </div>
-            <div class="grid-container">
-                <a href="https://share.wendabao.net/?model=gpt-4" class="grid-item" data-category="文本"  title="免费GPT4"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">免费GPT4</div>
-                    </div>
-                </a>
-                <a href="https://www.doubao.com/chat/" class="grid-item" data-category="文本"  title="免费AI助手，支持联网搜索"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">豆包</div>
-                    </div>
-                </a>		    
-                <a href="https://www.coze.com/" class="grid-item" data-category="文本"  title="免费GPT4机器人，需要代理"   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">Coze</div>
-                            </div>
-                        </a> 
-                <a href="https://www.perplexity.ai/" class="grid-item" data-category="文本" title="AI搜索引擎，实时数据抓取，对话式搜索，需要代理" target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">Perplexity</div>
-                            </div>
-                        </a> 		    
-                <a href="https://aibang.run/" class="grid-item"  title="AI小工具"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">AI帮个忙</div>
-                    </div>
-                </a>
-                <a href="https://www.liblib.art/" class="grid-item" data-category="图片"  title="免费在线AI绘画"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">哩布哩布AI</div>
-                    </div>
-                </a>
-                <a href="https://bigjpg.com/zh" class="grid-item" data-category="图片"  title="AI人工智能图片放大"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">Bigjpg-图片无损放大</div>
-                    </div>
-                </a>		    
-                <a href="https://www.remove.bg/zh" class="grid-item" data-category="图片"  title="一键去背景"   target="_blank">
-                    <div class="content">
-                        <div class="icons"><img src="" alt=""></div>
-                        <div class="text-content">图片去除背景-AI抠图</div>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-	    <section id="pc">
-            <h3>PC软件推荐</h3>
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-category="all">全部</button>
-                <button class="filter-btn" data-category="追番">追番</button>
-                <button class="filter-btn" data-category="工具">工具</button>
-            </div>
-            <div class="grid-container">
-                <a href="https://www.cycity.pro/" class="grid-item" data-category="追番"  title="高清在线看番，有弹幕"   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">次元城动漫</div>
-                            </div>
-                        </a> 		    
-                <a href="https://lion.craft.me/RenpyThief" class="grid-item" data-category="工具"  title="AI汉化"   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">游戏一键汉化工具</div>
-                            </div>
-                        </a> 
-                <a href="https://github.com/ogkalu2/comic-translate/blob/main/docs/README_zh-CN.md" class="grid-item" data-category="工具"  title=""   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">漫画机器翻译</div>
-                            </div>
-                        </a> 		    
-                <a href="https://one.one.one.one/" class="grid-item" data-category="工具"  title="免费"   target="_blank">
-                            <div class="content">
-                                <div class="icons-other">
-                                    <img src="https://favicon.im/one.one.one.one" alt="1.1.1.1"> 
-                                </div>
-                                <div class="text-content">1.1.1.1-免费VPN代理</div>
-                            </div>
-                 </a>    
-                        <a href="https://miru.js.org/download/" class="grid-item"  title="免费、开源的 支持视频、漫画、小说扩展源的多功能媒体娱乐应用"   target="_blank">
-                            <div class="content">
-                                <div class="square-bg">M</div>
-                                <div class="text-content">Miru-聚合资源软件</div>
-                            </div>
-                        </a>
-                <a href="https://myani.org/" class="grid-item" data-category="追番"  title="在线追番+字幕组种子下载，同步bangumi"   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">Ani：在线弹幕追番平台</div>
-                            </div>
-                        </a>
-                <a href="https://www.dandanplay.com/" class="grid-item" data-category="追番"  title="追番-全功能“本地视频+弹幕”播放器"   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">弹弹play</div>
-                            </div>
-                        </a>
-                <a href="https://zhouql.vip/bilibili/pc/" class="grid-item" data-category="工具"  title="简洁的B站视频下载工具，不能下番剧，操作简单"   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">BiliDown</div>
-                            </div>
-                        </a>
-		<a href="https://github.com/nilaoda/BBDown/issues/305" class="grid-item" data-category="工具"  title="可下番剧，批量下载并自动合并音视频，需要用命令行操作"   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">BBDown</div>
-                            </div>
-                        </a>    
-                <a href="https://yiyun.lanzout.com/iSyPb12rh4bi" class="grid-item" data-category="工具"  title="聚合磁力搜索软件"   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">磁力搜PC</div>
-                            </div>
-                        </a>    
-	        </div>
-        </section>	
-
-        <section id="app">
-            <h3>ACGN常用APP下载</h3>
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-category="all">全部</button>
-                <button class="filter-btn" data-category="追番">追番</button>
-                <button class="filter-btn" data-category="漫画">漫画</button>
-                <button class="filter-btn" data-category="本子">本子</button>
-                <button class="filter-btn" data-category="小说">小说</button>
-            </div>
-            <div class="grid-container">
-                <a href="https://ylyl.me/" class="grid-item" data-category="追番"  title="广告相对而言比较少，追番支持下载，安卓ios都有"   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">鸭梨鸭梨</div>
-                            </div>
-                        </a> 		    
-                <a href="https://www.yxzhi.com/?post_type=post&s=%E5%8A%A8%E6%BC%AB" class="grid-item" data-category="追番"  title="一些去广告的追番app"   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">动漫APP去广告</div>
-                            </div>
-                        </a>   
-                <a href="https://www.mangacopy.com/download" class="grid-item" data-category="漫画"  title="拷贝漫画官网，比较全的日漫"   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">拷貝漫畫</div>
-                            </div>
-                        </a>
-                           
-                <a href="https://jmcomicgo.me/" class="grid-item" data-category="本子"  title="未成年勿入，本子，需要开代理"   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">禁漫天堂</div>
-                            </div>
-                        </a> 
-                <a href="https://github.com/xiaojieonly/Ehviewer_CN_SXJ" class="grid-item" data-category="本子"  title="未成年勿入，本子，可能要开代理"   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">E站-Ehviewer</div>
-                            </div>
-                 </a>                           
-                <a href="https://www.picacomic.com/" class="grid-item" data-category="本子"  title="未成年勿入，本子，官网需要开代理"   target="_blank">
-                            <div class="content">
-                                <div class="square-bg"></div>
-                                <div class="text-content">哔咔漫画</div>
-                            </div>
-                        </a>
-                <a href="https://ivonblog.com/posts/tachiyomi-manga-reader/#21-%E5%AE%98%E6%96%B9%E7%89%88tachiyomi" class="grid-item" data-category="漫画"  title="挂梯子进去，多源漫画，漫画扩展在上面分类(更多),中文用拼音搜"   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">Tachiyomi</div>
-                            </div>
-                        </a> 
-
-                <a href="https://wenku8.mewx.org/" class="grid-item" data-category="小说"  title="文库8的轻小说APP"   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">轻小说文库</div>
-                            </div>
-                        </a>
-                <a href="https://www.yckceo.com/yuedu/index/index.html" class="grid-item" data-category="小说"  title="网文神器，网站提供导入书源合集以及APP，导入即可"   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">阅读</div>
-                            </div>
-                        </a>	
-            <a href="https://zh.singlelogin.re/z-access#android_app_tab" class="grid-item" data-category="小说"  title="海量电子书下载"   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">Z-Library</div>
-                            </div>
-                        </a>
-                <a href="https://github.com/YenalyLiew/Han1meViewer/releases" class="grid-item"  data-category="追番"  title="未成年勿入，Hanime1免翻，设置里-网络-开启hosts"   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">Han1meViewer</div>
-                            </div>
-                        </a>                          		    
-                <a href="https://github.com/CeuiLiSA/Pixiv-Shaft" class="grid-item"  title="第三方pixiv直连P站"   target="_blank">
-                            <div class="content">
-                                <div class="icons"><img src="" alt=""></div>
-                                <div class="text-content">Shaft-Pixiv免代理</div>
-                            </div>
-                        </a>               
-		    
-
-            </div>
-        </section>      
-    </div>
-
-
-</div>
-
-<!--  搜索按钮  -->
-<button id="openSearchModal">🔍</button>
-<!--  模态框  -->
-    <div id="searchModal" class="modal">
-
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>搜索导航内的网站</h2>
-            <div class="searchContainer">
-                <input type="text" id="searchInput" placeholder="搜索导航">
-                <button id="searchButton">🔍</button>
-            </div>
-            <div id="searchResults">
-                <!-- 搜索结果将在这里显示 -->
-            </div>
+    <div id="api-group-container">
+        <div class="api-group" onclick="loadImgFromGroup(this)">
+            <h2>jitsu·</h2>
+            <a data-url="https://moe.jitsu.top/img">正常向</a>
+            <a data-url="https://moe.jitsu.top/img/?sort=r18&size=1080p">r18涩图</a>
+            <a data-url="https://api.anosu.top/img?sort=pixiv&size=1080p">pixiv</a>
+            <a data-url="https://api.anosu.top/img?sort=jitsu&size=1080p">jitsu</a>
+            <a data-url="https://api.anosu.top/img/?sort=furry&size=1080p">兽耳</a>
+            <a data-url="https://moe.jitsu.top/img/?sort=setu&size=1080p">涩图不漏</a>
         </div>
-    </div>
+
+        <div class="api-group" onclick="loadImgFromGroup(this)">
+            <h4>动漫by樱道</h4>
+            <a data-url="https://api.r10086.com/樱道随机图片api接口.php?图片系列=动漫综合1">动漫综合1</a>
+            <a data-url="https://api.r10086.com/樱道随机图片api接口.php?自适应图片系列=妖精的尾巴">妖精的尾巴</a>
+             <a data-url="https://api.r10086.com/樱道随机图片api接口.php?自适应图片系列=缘之空">缘之空</a>
+             <a data-url="https://api.r10086.com/樱道随机图片api接口.php?自适应图片系列=罪恶王冠">罪恶王冠</a>
+             <a data-url="https://api.r10086.com/樱道随机图片api接口.php?自适应图片系列=海贼王">海贼王</a>
+             <a data-url="https://api.r10086.com/樱道随机图片api接口.php?自适应图片系列=为美好世界献上祝福">为美好世界献上</a>
+        </div>
+
+        <div class="api-group" onclick="loadImgFromGroup(this)">
+            <h4>二次元</h4>
+            <a data-url="https://api.mtyqx.cn/tapi/random.php">墨天逸</a>
+            <a data-url="https://pixiv-api.vercel.app/api/">Pixiv</a>
+        </div>
+
+        <div class="api-group" onclick="loadImgFromGroup(this)">
+            <h4>Loli·</h4>
+            <a data-url="https://www.loliapi.com/acg/">双端自适应图</a>
+            <a data-url="https://1st.moe/sion-bot/random-lolis/">网页内</a>
+
+        </div>
+
+        <div class="api-group" onclick="loadImgFromGroup(this)">
+            <h4>原神随机图</h4>
+            <a data-url="https://api.r10086.com/%E6%A8%B1%E9%81%93%E9%9A%8F%E6%9C%BA%E5%9B%BE%E7%89%87api%E6%8E%A5%E5%8F%A3.php?%E8%87%AA%E9%80%82%E5%BA%94%E5%9B%BE%E7%89%87%E7%B3%BB%E5%88%97=%E5%8E%9F%E7%A5%9E">○神启动</a>
+            <a data-url="https://image.anosu.top/pixiv/direct?r18=1&keyword=genshinimpact">原p启动-r18</a>
+        </div>
+
+        <div class="api-group" onclick="loadImgFromGroup(this)">
+            <h4>随机东方图</h4>
+            <a data-url="https://img.paulzzh.com/touhou/random">东方图</a>
+            <a data-url="https://api.r10086.com/樱道随机图片api接口.php?图片系列=东方project1">樱道-东方图</a>
+        </div>
+
+        <div class="api-group" onclick="loadImgFromGroup(this)">
+            <h4>随机Coser图</h4>
+            <a data-url="https://api.r10086.com/樱道随机图片api接口.php?图片系列=少女写真1">少女写真</a>
+        </div>
+
+        <div class="api-group" onclick="loadImgFromGroup(this)">
+            <h4>随机三次元小姐姐</h4>
+            <a data-url="https://api.lolimi.cn/API/tup/xjj.php">点我</a>
+        </div>
 
 
-    <script type="text/javascript"  src="static/js/tooltip.js"></script>
-    <script type="text/javascript"  src="static/js/scroll.js"></script>
-    <script type="text/javascript"  src="static/js/search.js"></script>
-    <script type="text/javascript"  src="static/js/tagFilter.js"></script>
-    <script type="text/javascript" src="static/js/squrebg.js"></script>
-    <script type="text/javascript" src="static/js/findLink.js"></script>
+        <div class="api-group" onclick="loadImgFromGroup(this)">
+            <h4>随机三次元白丝</h4>
+            <a data-url="https://api.asxe.vip/whitesilk.php">白丝</a>
+            <a data-url="https://v2.api-m.com/api/baisi?return=302">白丝v2</a>
+        </div>
 
+        <div class="api-group" onclick="loadImgFromGroup(this)">
+            <h4>随机三次元黑丝</h4>
+            <a data-url="https://api.suyanw.cn/api/hs/">黑丝</a>
+            <a data-url="https://api.sdbj.top/api/heisi?apiKey=a849bdb8b4a9829bcf3f875f7ac6785e">黑丝-需key</a>
+        </div>
+
+        <div class="api-group" onclick="loadImgFromGroup(this)">
+            <h4>随机甘城猫猫</h4>
+            <a data-url="https://api.suyanw.cn/api/mao/">甘城猫猫图</a>
+        </div>
+
+
+
+        <div class="api-group" onclick="loadImgFromGroup(this)">
+            <h4>随机二次元头像</h4>
+            <a data-url="https://www.loliapi.com/acg/pp/">头像</a>
+        </div>
+
+
+<script>
+const imgElement = document.getElementById('randomImage');
+const apiGroups = document.querySelectorAll('.api-group');
+const container = document.getElementById("container");
+let loadAttempts = 0;
+
+function loadImg(url) {
+    // 判断是否是需要特殊处理的 API
+    const isSpecialApi = url.startsWith('https://api.r10086.com/');
+    
+    if (isSpecialApi) {
+        // 对需要的 URL 进行部分编码
+        const [baseUrl, queryString] = url.split('?');
+        let finalUrl = baseUrl;
+
+        if (queryString) {
+            const params = new URLSearchParams(queryString);
+            for (const [key, value] of params) {
+                // 编码参数值以处理中文字符
+                params.set(key, encodeURIComponent(value));
+            }
+            finalUrl += '?' + params.toString().replace(/%25/g, '%'); // 修正双重编码
+        }
+
+        imgElement.src = finalUrl + "&" + Date.now(); // 加时间戳防缓存
+        imgElement.onerror = handleImageError(finalUrl); // 传递最终 URL
+    } else {
+        // 其他 URL 直接加载
+        imgElement.src = url + "?" + Date.now();
+        imgElement.onerror = handleImageError(url);
+    }
+}
+
+function handleImageError(url) {
+    return function() {
+        console.error(`Image load failed for URL: ${url}`); // 输出失败的URL
+        loadAttempts++;
+        if (loadAttempts < 2) {
+            // 刷新图片
+            loadImg(url);
+        } else {
+            // 第二次失败，开启新窗口
+            window.open(url, '_blank');
+        }
+    };
+}
+
+function loadImgFromGroup(group) {
+    const links = group.querySelectorAll('a');
+    const randomLink = links[Math.floor(Math.random() * links.length)];
+    const url = randomLink.dataset.url; // 从 data-url 属性获取 URL
+    loadAttempts = 0; // 重置加载尝试次数
+    loadImg(url);
+}
+
+function initialLoad() {
+    const allLinks = container.querySelectorAll("a");
+    const randomLink = 'https://t.alcy.cc/ycy';
+    loadImg(randomLink);
+}
+
+window.onload = initialLoad;
+
+apiGroups.forEach(group => {
+    group.addEventListener('click', () => loadImgFromGroup(group));
+    const links = group.querySelectorAll('a');
+    links.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.stopPropagation(); // Prevent click from triggering group click
+            loadAttempts = 0; // 重置加载尝试次数
+            loadImg(link.dataset.url);
+        });
+    });
+});
+
+
+</script>
 
 </body>
-</html>
+    </html>
