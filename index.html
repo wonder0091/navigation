@@ -1,345 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>随机图片API合集</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e1e2e, #283048);
+            color: #f9f9f9;
             display: flex;
-            background-color: #f4f4f4;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
         }
 
-        /* 布局容器 */
-        #container {
-            display: flex;
-            width: 100%;
-            max-width: 1200px;
-            margin: auto;
-            padding: 20px;
-            gap: 20px; /* 添加间距 */
-        }
-
-        /* 左侧大图区域 */
-        #image-container {
-            display: flex;
-            position: relative; 
-            display: flex; /* 启用 Flex 布局 */
-            flex-direction: column; /* 垂直排列 */ /* 新增 */
-            align-items: center;  /* 水平居中 */ /* 新增 */
-            border-right: 2px solid #ddd;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        img {
-            max-width: 100%;
-            max-height: calc(80vh); /* Prevent image overflow */
-            border-radius: 5px;
-            object-fit: contain;
-        }
-
- /* 开关按钮样式 */
-           #toggle-container {
-            margin: 10px 0; /* 调整按钮外边距 */
-            width: auto;
-        }
-
-        #toggle-container input {
-            cursor: pointer;
-            font-size: 16px;
-            background-color: #28903d;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            margin-left: 80px;
-            padding: 5px;
-            transition: background-color 0.3s;
-        }
-
-    
-        /* 右侧API组区域 */
-        #api-group-container {
-            flex: 0 0 30%; /* 右侧占30% */
-            display: grid; /* 改为双列布局 */
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            padding: 10px;
-            overflow-y: auto; /* 允许纵向滚动 */
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .api-group {
-            border: 1px solid #ddd;
-            padding: 15px;
-            border-radius: 5px;
+        .profile-container {
             text-align: center;
-            transition: background-color 0.3s;
-            cursor: pointer; /* Make the whole group clickable */
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(15px);
         }
 
-        .api-group:hover {
-            background-color: #f1f1f1; /* Hover效果 */
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto;
+            margin-bottom: 15px;
+            border: 5px solid #4a90e2;
+            background: url(Shikinka.png) no-repeat center center;
+            background-size: cover;
         }
 
-        h2, h4 {
-            margin-top: 0;
-            margin-bottom: 10px;
-        }
-
-        a {
-            display: block;
+        .username {
+            font-size: 28px;
+            font-weight: bold;
             margin-bottom: 5px;
+        }
+
+        .title {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #4a90e2;
+        }
+
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-bottom: 15px;
+        }
+
+        .link-card {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            margin: 10px;
+            padding: 15px;
+            width: 48%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, background 0.3s;
+            text-align: center;
+        }
+
+        .link-card a {
             text-decoration: none;
-            color: #337ab7;
+            color: #f9f9f9;
+            font-size: 16px;
         }
 
-        a:hover {
-            text-decoration: underline;
+        .link-card:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: translateY(-5px);
         }
 
-        /* 移动端样式 */
-        @media (max-width: 768px) {
-            #container {
-                flex-direction: column; /* 改为竖向布局 */
-            }
-
-            /* 调整API组容器在移动端的样式 */
-            #api-group-container {
-                flex: 1 1 100%;
-                margin-top: 20px;
-                border-right: none; /* 移除右边的分隔线 */
-                grid-template-columns: 1fr 1fr; /* 依然保持双列布局 */
-            }
-
-            /* 缩小每个API组的边距 */
-            .api-group {
-                width: 90%;
-                height: 90%;
-                padding: 5px;
-            }
-
-            /* 确保图片居中显示 */
-            #image-container {
-                padding-bottom: 10px;
-            }
-
-            /* 调整图片位置 */
-            img {
-                max-height: calc(100vh - 150px); /* 留出额外的空间，避免在小屏幕上溢出 */
-                top: 0; /* 在移动端不需要向上偏移 */
-            }
+        .footer {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #aaa;
         }
-
 
     </style>
+    <title>Shikinka's Pages</title>
 </head>
 <body>
-
-<div id="container">
-    <div id="image-container">
-        <img id="randomImage" src="" alt="Random Image">
-        <div id="toggle-container">
-            <input type="button"  value="切换显示方式" onclick="toggleImageLoadMode()">
-            <br>
-            当前：<span type="button" id="tip">页内API加载 (只能保存随机的图)</span>
+    <div class="profile-container">
+        <div class="profile-pic"></div>
+        <div class="username">Hello I'm Shikinka</div>
+        <div class="title">This Is My Personal Tools Page~</div>
+        <div class="links">
+            <div class="link-card"><a target="_blank" href="https://yyzs.cloudns.org">博客</a></div>
+            <div class="link-card"><a target="_blank" href="https://acg.cloudns.org">导航</a></div>
+            <div class="link-card"><a target="_blank" href="https://imgurls.us.kg/random.html">随机图</a></div>
+            <div class="link-card"><a target="_blank" href="https://faye.us.kg">短链接</a></div>
+            <div class="link-card"><a target="_blank" href="https://1yun.us.kg">剪贴板</a></div>
         </div>
+        <div class="footer">© 2024 Shikinka. All rights reserved.</div>
     </div>
-
-
-    <div id="api-group-container">
-        <div class="api-group" onclick="loadImgFromGroup(this)">
-            <h2>jitsu·</h2>
-            <a data-url="https://moe.jitsu.top/img">正常向</a>
-            <a data-url="https://moe.jitsu.top/img/?sort=r18&size=1080p">r18涩图</a>
-            <a data-url="https://api.anosu.top/img?sort=pixiv&size=1080p">pixiv</a>
-            <a data-url="https://api.anosu.top/img?sort=jitsu&size=1080p">jitsu</a>
-            <a data-url="https://api.anosu.top/img/?sort=furry&size=1080p">兽耳</a>
-            <a data-url="https://moe.jitsu.top/img/?sort=setu&size=1080p">涩图不漏</a>
-        </div>
-
-        <div class="api-group" onclick="loadImgFromGroup(this)">
-            <h4>动漫by樱道</h4>
-            <a data-url="https://api.r10086.com/樱道随机图片api接口.php?图片系列=动漫综合1">动漫综合1</a>
-            <a data-url="https://api.r10086.com/樱道随机图片api接口.php?自适应图片系列=妖精的尾巴">妖精的尾巴</a>
-            <a data-url="https://api.r10086.com/樱道随机图片api接口.php?自适应图片系列=缘之空">缘之空</a>
-            <a data-url="https://api.r10086.com/樱道随机图片api接口.php?自适应图片系列=罪恶王冠">罪恶王冠</a>
-            <a data-url="https://api.r10086.com/樱道随机图片api接口.php?自适应图片系列=海贼王">海贼王</a>
-            <a data-url="https://api.r10086.com/樱道随机图片api接口.php?自适应图片系列=为美好世界献上祝福">为美好世界献上</a>
-        </div>
-
-        <div class="api-group" onclick="loadImgFromGroup(this)">
-            <h4>二次元</h4>
-            <a data-url="https://api.mtyqx.cn/tapi/random.php">墨天逸</a>
-            <a data-url="https://pixiv-api.vercel.app/api/">Pixiv</a>
-        </div>
-
-        <div class="api-group" onclick="loadImgFromGroup(this)">
-            <h4>Loli·</h4>
-            <a data-url="https://www.loliapi.com/acg/">双端自适应图</a>
-            <a data-url="https://1st.moe/sion-bot/random-lolis/">需跳转</a>
-        </div>
-
-        <div class="api-group" onclick="loadImgFromGroup(this)">
-            <h4>原神随机图</h4>
-            <a data-url="https://api.r10086.com/%E6%A8%B1%E9%81%93%E9%9A%8F%E6%9C%BA%E5%9B%BE%E7%89%87api%E6%8E%A5%E5%8F%A3.php?%E8%87%AA%E9%80%82%E5%BA%94%E5%9B%BE%E7%89%87%E7%B3%BB%E5%88%97=%E5%8E%9F%E7%A5%9E">○神启动</a>
-            <a data-url="https://image.anosu.top/pixiv/direct?r18=1&keyword=genshinimpact">原p启动-r18</a>
-        </div>
-
-        <div class="api-group" onclick="loadImgFromGroup(this)">
-            <h4>随机东方图</h4>
-            <a data-url="https://img.paulzzh.com/touhou/random">东方图</a>
-            <a data-url="https://api.r10086.com/樱道随机图片api接口.php?图片系列=东方project1">东方-樱道</a>
-        </div>
-
-        <div class="api-group" onclick="loadImgFromGroup(this)">
-            <h4>随机Coser图</h4>
-            <a data-url="https://api.r10086.com/樱道随机图片api接口.php?图片系列=少女写真1">少女写真</a>
-        </div>
-
-        <div class="api-group" onclick="loadImgFromGroup(this)">
-            <h4>随机三次元小姐姐</h4>
-            <a data-url="https://api.lolimi.cn/API/tup/xjj.php">点我</a>
-        </div>
-
-
-        <div class="api-group" onclick="loadImgFromGroup(this)">
-            <h4>随机三次元白丝</h4>
-            <a data-url="https://api.asxe.vip/whitesilk.php">白丝</a>
-            <a data-url="https://v2.api-m.com/api/baisi?return=302">白丝302</a>
-        </div>
-
-        <div class="api-group" onclick="loadImgFromGroup(this)">
-            <h4>随机三次元黑丝</h4>
-            <a data-url="https://api.suyanw.cn/api/hs/">黑丝</a>
-            <a data-url="https://api.sdbj.top/api/heisi?apiKey=a849bdb8b4a9829bcf3f875f7ac6785e">黑丝-需key</a>
-        </div>
-
-        <div class="api-group" onclick="loadImgFromGroup(this)">
-            <h4>随机甘城猫猫</h4>
-            <a data-url="https://api.suyanw.cn/api/mao/">甘城猫猫图</a>
-        </div>
-
-
-
-        <div class="api-group" onclick="loadImgFromGroup(this)">
-            <h4>随机二次元头像</h4>
-            <a data-url="https://www.loliapi.com/acg/pp/">头像</a>
-        </div>
-    </div>
-</div>
-
-
-
-<script>
-const imgElement = document.getElementById('randomImage');
-const apiGroups = document.querySelectorAll('.api-group');
-const container = document.getElementById("container");
-let loadAttempts = 0;
-let openInNewTab = false;
-
-function toggleImageLoadMode() {
-    openInNewTab = !openInNewTab;
-    const toggleButton = document.querySelector('#toggle-container input');
-    const vl = document.getElementById('tip');
-    if (openInNewTab) {
-        vl.innerText = '新标签加载 (新标签可保存页面图)'; 
-    } else {
-        vl.innerText = '页内API加载 (只能保存随机的图)';
-    }
-}
-
-function loadImg(url) {
-    // 判断是否是需要特殊处理的 API
-    const isSpecialApi = url.startsWith('https://api.r10086.com/');
-    
-    if (isSpecialApi) {
-        // 对需要的 URL 进行部分编码
-        const [baseUrl, queryString] = url.split('?');
-        let finalUrl = baseUrl;
-
-        if (queryString) {
-            const params = new URLSearchParams(queryString);
-            for (const [key, value] of params) {
-                // 编码参数值以处理中文字符
-                params.set(key, encodeURIComponent(value));
-            }
-            finalUrl += '?' + params.toString().replace(/%25/g, '%'); // 修正双重编码
-        }
-
-        if (openInNewTab) {
-            window.open(finalUrl, '_blank');
-        } else {
-            imgElement.src = finalUrl + "&" + Date.now(); // 加时间戳防缓存
-            imgElement.onerror = handleImageError(finalUrl); // 传递最终 URL
-        }
-    } else {
-        // 其他 URL 直接加载
-        if (openInNewTab) {
-            window.open(url, '_blank');
-        } else {
-            imgElement.src = url + "?" + Date.now();
-            imgElement.onerror = handleImageError(url);
-        }
-    }
-}
-
-let imageContainer = document.getElementById('image-container');
-
-function handleImageError(url) {
-    return function() {
-        console.error(`Image load failed for URL: ${url}`); // 输出失败的URL
-        loadAttempts++;
-        
-        if (loadAttempts < 2) {
-            // 尝试重新加载图片
-            loadImg(url);
-        } else {
-            // 第二次失败后直接在新标签中打开图片
-            window.open(url, '_blank');
-            
-            // 保持图片和容器大小不变，不做任何修改
-            // 这里不需要任何额外的处理，因为我们不做任何样式上的更改
-        }
-    };
-}
-
-
-
-function loadImgFromGroup(group) {
-    const links = group.querySelectorAll('a');
-    const randomLink = links[Math.floor(Math.random() * links.length)];
-    const url = randomLink.dataset.url; // 从 data-url 属性获取 URL
-    loadAttempts = 0; // 重置加载尝试次数
-    loadImg(url);
-}
-
-function initialLoad() {
-    const allLinks = container.querySelectorAll("a");
-    const randomLink = 'https://t.alcy.cc/ycy';
-    loadImg(randomLink);
-}
-
-window.onload = initialLoad;
-
-apiGroups.forEach(group => {
-    group.addEventListener('click', () => loadImgFromGroup(group));
-    const links = group.querySelectorAll('a');
-    links.forEach(link => {
-        link.addEventListener('click', (event) => {
-            event.stopPropagation(); // Prevent click from triggering group click
-            loadAttempts = 0; // 重置加载尝试次数
-            loadImg(link.dataset.url);
-        });
-    });
-});
-</script>
-
 </body>
 </html>
