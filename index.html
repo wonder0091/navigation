@@ -13,113 +13,130 @@
             background-color: #f4f4f4;
         }
 
-/* 布局容器 */
-#container {
-    display: flex;
-    width: 100%;
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
-    gap: 20px; /* 添加间距 */
-}
+        /* 布局容器 */
+        #container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            gap: 20px; /* 添加间距 */
+        }
 
-/* 左侧大图区域 */
-#image-container {
-    flex: 0 0 70%; /* 左侧占70% */
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* 改为顶部对齐 */
-    padding: 10px;
-    border-right: 2px solid #ddd;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    position: relative;
-}
+        /* 左侧大图区域 */
+        #image-container {
+            display: flex;
+            position: relative; 
+            display: flex; /* 启用 Flex 布局 */
+            flex-direction: column; /* 垂直排列 */ /* 新增 */
+            align-items: center;  /* 水平居中 */ /* 新增 */
+            border-right: 2px solid #ddd;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
 
-img {
-    max-width: 100%;
-    max-height: calc(100vh - 100px); /* Prevent image overflow */
-    display: block;
-    border-radius: 5px;
-    position: relative;
-    top: -5px; 
-}
+        img {
+            max-width: 100%;
+            max-height: calc(80vh); /* Prevent image overflow */
+            border-radius: 5px;
+            object-fit: contain;
+        }
 
-/* 右侧API组区域 */
-#api-group-container {
-    flex: 0 0 30%; /* 右侧占30% */
-    display: grid; /* 改为双列布局 */
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    padding: 10px;
-    overflow-y: auto; /* 允许纵向滚动 */
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
+ /* 开关按钮样式 */
+           #toggle-container {
+            margin: 10px 0; /* 调整按钮外边距 */
+            width: auto;
+        }
 
-.api-group {
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 5px;
-    text-align: center;
-    transition: background-color 0.3s;
-    cursor: pointer; /* Make the whole group clickable */
-}
+        #toggle-container input {
+            cursor: pointer;
+            font-size: 16px;
+            background-color: #28903d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-left: 80px;
+            padding: 5px;
+            transition: background-color 0.3s;
+        }
 
-.api-group:hover {
-    background-color: #f1f1f1; /* Hover效果 */
-}
+    
+        /* 右侧API组区域 */
+        #api-group-container {
+            flex: 0 0 30%; /* 右侧占30% */
+            display: grid; /* 改为双列布局 */
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            padding: 10px;
+            overflow-y: auto; /* 允许纵向滚动 */
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
 
-h2, h4 {
-    margin-top: 0;
-    margin-bottom: 10px;
-}
+        .api-group {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s;
+            cursor: pointer; /* Make the whole group clickable */
+        }
 
-a {
-    display: block;
-    margin-bottom: 5px;
-    text-decoration: none;
-    color: #337ab7;
-}
+        .api-group:hover {
+            background-color: #f1f1f1; /* Hover效果 */
+        }
 
-a:hover {
-    text-decoration: underline;
-}
+        h2, h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
 
-/* 移动端样式 */
-@media (max-width: 768px) {
-    #container {
-        flex-direction: column; /* 改为竖向布局 */
-    }
+        a {
+            display: block;
+            margin-bottom: 5px;
+            text-decoration: none;
+            color: #337ab7;
+        }
 
-    /* 调整API组容器在移动端的样式 */
-    #api-group-container {
-        flex: 1 1 100%;
-        margin-top: 20px;
-        border-right: none; /* 移除右边的分隔线 */
-        grid-template-columns: 1fr 1fr; /* 依然保持双列布局 */
-    }
+        a:hover {
+            text-decoration: underline;
+        }
 
-    /* 缩小每个API组的边距 */
-    .api-group {
-       width:90%;
-       height:90%;
-        padding: 5px;
-    }
+        /* 移动端样式 */
+        @media (max-width: 768px) {
+            #container {
+                flex-direction: column; /* 改为竖向布局 */
+            }
 
-    /* 确保图片居中显示 */
-    #image-container {
-        padding-bottom: 10px;
-    }
+            /* 调整API组容器在移动端的样式 */
+            #api-group-container {
+                flex: 1 1 100%;
+                margin-top: 20px;
+                border-right: none; /* 移除右边的分隔线 */
+                grid-template-columns: 1fr 1fr; /* 依然保持双列布局 */
+            }
 
-    /* 调整图片位置 */
-    img {
-        max-height: calc(100vh - 150px); /* 留出额外的空间，避免在小屏幕上溢出 */
-        top: 0; /* 在移动端不需要向上偏移 */
-    }
-}
+            /* 缩小每个API组的边距 */
+            .api-group {
+                width: 90%;
+                height: 90%;
+                padding: 5px;
+            }
+
+            /* 确保图片居中显示 */
+            #image-container {
+                padding-bottom: 10px;
+            }
+
+            /* 调整图片位置 */
+            img {
+                max-height: calc(100vh - 150px); /* 留出额外的空间，避免在小屏幕上溢出 */
+                top: 0; /* 在移动端不需要向上偏移 */
+            }
+        }
+
 
     </style>
 </head>
@@ -128,7 +145,13 @@ a:hover {
 <div id="container">
     <div id="image-container">
         <img id="randomImage" src="" alt="Random Image">
+        <div id="toggle-container">
+            <input type="button"  value="切换显示方式" onclick="toggleImageLoadMode()">
+            <br>
+            当前：<span type="button" id="tip">页内API加载 (不能保存页面图)</span>
+        </div>
     </div>
+
 
     <div id="api-group-container">
         <div class="api-group" onclick="loadImgFromGroup(this)">
@@ -145,10 +168,10 @@ a:hover {
             <h4>动漫by樱道</h4>
             <a data-url="https://api.r10086.com/樱道随机图片api接口.php?图片系列=动漫综合1">动漫综合1</a>
             <a data-url="https://api.r10086.com/樱道随机图片api接口.php?自适应图片系列=妖精的尾巴">妖精的尾巴</a>
-             <a data-url="https://api.r10086.com/樱道随机图片api接口.php?自适应图片系列=缘之空">缘之空</a>
-             <a data-url="https://api.r10086.com/樱道随机图片api接口.php?自适应图片系列=罪恶王冠">罪恶王冠</a>
-             <a data-url="https://api.r10086.com/樱道随机图片api接口.php?自适应图片系列=海贼王">海贼王</a>
-             <a data-url="https://api.r10086.com/樱道随机图片api接口.php?自适应图片系列=为美好世界献上祝福">为美好世界献上</a>
+            <a data-url="https://api.r10086.com/樱道随机图片api接口.php?自适应图片系列=缘之空">缘之空</a>
+            <a data-url="https://api.r10086.com/樱道随机图片api接口.php?自适应图片系列=罪恶王冠">罪恶王冠</a>
+            <a data-url="https://api.r10086.com/樱道随机图片api接口.php?自适应图片系列=海贼王">海贼王</a>
+            <a data-url="https://api.r10086.com/樱道随机图片api接口.php?自适应图片系列=为美好世界献上祝福">为美好世界献上</a>
         </div>
 
         <div class="api-group" onclick="loadImgFromGroup(this)">
@@ -160,8 +183,7 @@ a:hover {
         <div class="api-group" onclick="loadImgFromGroup(this)">
             <h4>Loli·</h4>
             <a data-url="https://www.loliapi.com/acg/">双端自适应图</a>
-            <a data-url="https://1st.moe/sion-bot/random-lolis/">网页内</a>
-
+            <a data-url="https://1st.moe/sion-bot/random-lolis/">需跳转</a>
         </div>
 
         <div class="api-group" onclick="loadImgFromGroup(this)">
@@ -173,7 +195,7 @@ a:hover {
         <div class="api-group" onclick="loadImgFromGroup(this)">
             <h4>随机东方图</h4>
             <a data-url="https://img.paulzzh.com/touhou/random">东方图</a>
-            <a data-url="https://api.r10086.com/樱道随机图片api接口.php?图片系列=东方project1">樱道-东方图</a>
+            <a data-url="https://api.r10086.com/樱道随机图片api接口.php?图片系列=东方project1">东方-樱道</a>
         </div>
 
         <div class="api-group" onclick="loadImgFromGroup(this)">
@@ -190,7 +212,7 @@ a:hover {
         <div class="api-group" onclick="loadImgFromGroup(this)">
             <h4>随机三次元白丝</h4>
             <a data-url="https://api.asxe.vip/whitesilk.php">白丝</a>
-            <a data-url="https://v2.api-m.com/api/baisi?return=302">白丝v2</a>
+            <a data-url="https://v2.api-m.com/api/baisi?return=302">白丝302</a>
         </div>
 
         <div class="api-group" onclick="loadImgFromGroup(this)">
@@ -210,6 +232,9 @@ a:hover {
             <h4>随机二次元头像</h4>
             <a data-url="https://www.loliapi.com/acg/pp/">头像</a>
         </div>
+    </div>
+</div>
+
 
 
 <script>
@@ -217,6 +242,18 @@ const imgElement = document.getElementById('randomImage');
 const apiGroups = document.querySelectorAll('.api-group');
 const container = document.getElementById("container");
 let loadAttempts = 0;
+let openInNewTab = false;
+
+function toggleImageLoadMode() {
+    openInNewTab = !openInNewTab;
+    const toggleButton = document.querySelector('#toggle-container input');
+    const vl = document.getElementById('tip');
+    if (openInNewTab) {
+        vl.innerText = '新标签加载 (新标签可保存页面图)'; 
+    } else {
+        vl.innerText = '页内API加载 (只能保存随机图)';
+    }
+}
 
 function loadImg(url) {
     // 判断是否是需要特殊处理的 API
@@ -236,28 +273,44 @@ function loadImg(url) {
             finalUrl += '?' + params.toString().replace(/%25/g, '%'); // 修正双重编码
         }
 
-        imgElement.src = finalUrl + "&" + Date.now(); // 加时间戳防缓存
-        imgElement.onerror = handleImageError(finalUrl); // 传递最终 URL
+        if (openInNewTab) {
+            window.open(finalUrl, '_blank');
+        } else {
+            imgElement.src = finalUrl + "&" + Date.now(); // 加时间戳防缓存
+            imgElement.onerror = handleImageError(finalUrl); // 传递最终 URL
+        }
     } else {
         // 其他 URL 直接加载
-        imgElement.src = url + "?" + Date.now();
-        imgElement.onerror = handleImageError(url);
+        if (openInNewTab) {
+            window.open(url, '_blank');
+        } else {
+            imgElement.src = url + "?" + Date.now();
+            imgElement.onerror = handleImageError(url);
+        }
     }
 }
+
+let imageContainer = document.getElementById('image-container');
 
 function handleImageError(url) {
     return function() {
         console.error(`Image load failed for URL: ${url}`); // 输出失败的URL
         loadAttempts++;
+        
         if (loadAttempts < 2) {
-            // 刷新图片
+            // 尝试重新加载图片
             loadImg(url);
         } else {
-            // 第二次失败，开启新窗口
+            // 第二次失败后直接在新标签中打开图片
             window.open(url, '_blank');
+            
+            // 保持图片和容器大小不变，不做任何修改
+            // 这里不需要任何额外的处理，因为我们不做任何样式上的更改
         }
     };
 }
+
+
 
 function loadImgFromGroup(group) {
     const links = group.querySelectorAll('a');
@@ -286,9 +339,7 @@ apiGroups.forEach(group => {
         });
     });
 });
-
-
 </script>
 
 </body>
-    </html>
+</html>
