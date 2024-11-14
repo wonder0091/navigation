@@ -148,7 +148,7 @@
         <div id="toggle-container">
             <input type="button"  value="切换显示方式" onclick="toggleImageLoadMode()">
             <br>
-            当前：<span type="button" id="tip">页内API加载 (不能保存页面图)</span>
+            当前：<span type="button" id="tip">页内API加载 (只能保存随机的图)</span>
         </div>
     </div>
 
@@ -251,7 +251,7 @@ function toggleImageLoadMode() {
     if (openInNewTab) {
         vl.innerText = '新标签加载 (新标签可保存页面图)'; 
     } else {
-        vl.innerText = '页内API加载 (只能保存随机图)';
+        vl.innerText = '页内API加载 (只能保存随机的图)';
     }
 }
 
